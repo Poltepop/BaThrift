@@ -1,21 +1,14 @@
 <?php
 $host     = "localhost";
-$port     = "3307"; 
-$dbname   = "nama_database";
+$port     = 3307;
+$dbname   = "bathrift";
 $username = "root";
 $password = "";
-$charset  = "utf8mb4";
 
-$dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=$charset";
+$conn = mysqli_connect($host, $username, $password, $dbname, $port);
 
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-
-try {
-    $pdo = new PDO($dsn, $username, $password, $options);
-} catch (PDOException $e) {
-    die("Koneksi gagal: " . $e->getMessage());
+if (!$conn) {
+    die("Koneksi gagal: " . mysqli_connect_error());
 }
+
+mysqli_set_charset($conn, "utf8mb4");
