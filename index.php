@@ -1,20 +1,11 @@
 <?php
 
-// if(isset($_SERVER['PATH_INFO'])){
-//     echo $_SERVER['PATH_INFO'];
-// }else{
-//     echo "path info not found";
-// }
 require_once __DIR__ . '/./app/Core/View.php';
-
+require_once __DIR__ . '/./app/Core/Router.php';
 
 $title = 'Hello From Index';
 
-if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == '/home'){
-    Render('Home/index', [
-        'title' => $title
-    ]);
-}else{
-    echo "404";
-}
+$path = $_SERVER['PATH_INFO'] ?? '/';
 
+add('GET', '/', 'HomeController', 'index');
+run();
