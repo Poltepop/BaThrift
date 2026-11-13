@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/BaThrift/auth" method="POST">
+    <form action="<?=  url('/auth') ?>" method="POST">
         <label for="email">email</label>
         <input type="email" id="email" name="email">
         <br><br>

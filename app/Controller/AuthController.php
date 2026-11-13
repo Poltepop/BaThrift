@@ -4,7 +4,8 @@ require_once __DIR__ . "/../Core/View.php";
 require_once __DIR__ . "/../Model/User.php";
 
 function login(): void{
-    $error_login = $_SESSION['error_login'];
+    $error_login = $_SESSION['error_login'] ?? '';
+    unset($_SESSION['error_login']);
 
     Render("Auth/login", [
         'error_login' => $error_login

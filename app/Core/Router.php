@@ -2,13 +2,14 @@
 
 $routes = [];
 
-function base_url(string $path = ''): string {
-    $base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+function url(string $path = ''): string {
+    $base = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
     return $base . '/' . ltrim($path, '/');
 }
 
 function redirect(string $path = ''): void {
-    header('Location: ' . base_url($path));
+    // http_response_code(303);
+    header('Location: ' . url($path));
     exit();
 }
 
@@ -32,11 +33,9 @@ function run(): void{
     $path = '/';
     global $routes;
 
-    if(isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] !== ''){
-        $path = $_SERVER['PATH_INFO'];
-    } elseif(isset($_SERVER['REQUEST_URI'])){
+    if(isset($_SERVER['REQUEST_URI'])){
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $base = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+        $base = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
         $path = '/' . ltrim(substr($uri, strlen($base)), '/');
     }
 
