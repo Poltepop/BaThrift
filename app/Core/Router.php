@@ -14,18 +14,20 @@ function redirect(string $path = ''): void {
 }
 
 function add(
-    string $method, // GET / POST / DELETE
-    string $path, // /Home
-    string $controller, // HomeController
-    string $function // index
+    string $method,       // GET / POST / DELETE
+    string $path,         // /home
+    string $controller,   // HomeController
+    string $function,     // index
+    array $middlewares = [] // ['auth', 'admin', ...]
 ): void{
     global $routes;
 
     $routes[] = [
-        'method' => $method,
-        'path' => $path,
-        'controller' => $controller,
-        'function' => $function,
+        'method'      => $method,
+        'path'        => $path,
+        'controller'  => $controller,
+        'function'    => $function,
+        'middlewares' => $middlewares,
     ];
 }
 
@@ -43,6 +45,11 @@ function run(): void{
 
     foreach($routes as $route){
         if($path == $route['path'] && $method == $route['method']){
+
+            foreach($route['middlewares'] as $middleware){
+                call_user_func("middleware$middleware");
+            }
+
             require_once __DIR__ . "/../Controller/" . $route['controller'] . ".php";
             call_user_func($route['function']);
             return;

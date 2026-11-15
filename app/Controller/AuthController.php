@@ -28,7 +28,7 @@ function auth(): void{
         $_SESSION['errors'] = $errors;
 
         if($user){
-            $_SESSION['user'] = $user['user'];
+            $_SESSION['user'] = $user;
             redirect('/');
             return;
         }
