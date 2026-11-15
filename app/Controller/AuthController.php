@@ -2,30 +2,39 @@
 
 require_once __DIR__ . "/../Core/View.php";
 require_once __DIR__ . "/../Model/User.php";
+require_once __DIR__ . "/../Core/Validator.php";
 
 function login(): void{
-    $error_login = $_SESSION['error_login'] ?? '';
-    unset($_SESSION['error_login']);
+    $errors = $_SESSION['errors'] ?? [];
+    unset($_SESSION['errors']);
 
     Render("Auth/login", [
-        'error_login' => $error_login
+        'title' => 'login',
+        'errors' => $errors
     ]);
 }
 
 function auth(): void{
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $users = getAllUser();
         $email = trim($_POST['email']);
         $pass = $_POST['password'];
+        $user = userAuthenticate($email, $pass);
 
-        foreach($users as $user){
-            if($email == $user['email'] && $pass == $user['password']){
-                $_SESSION['user_id'] = $user['id'];
-                redirect('/');
-            }
+        $errors = array_filter([
+            'email' => validate($email, required(), min_length(3), max_length(100), email_format()),
+            'password' => validate($pass, required())
+        ]);
+        
+        $_SESSION['errors'] = $errors;
+
+        if($user){
+            $_SESSION['user'] = $user['user'];
+            redirect('/');
+            return;
         }
         
-        $_SESSION['error_login'] = 'email atau password salah';
+        $errors['error_login'] = 'Email Atau Password Salah';
+        $_SESSION['errors'] = $errors;
         redirect('/login');
     }
 }
