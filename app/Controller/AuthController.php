@@ -40,7 +40,9 @@ function auth(): void{
 }
 
 function register(): void{
-
+    Render('Auth/register', [
+        'title' => 'register'
+    ]);
 }
 
 function storeRegister(): void{
