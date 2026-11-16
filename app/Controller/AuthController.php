@@ -27,9 +27,15 @@ function auth(): void{
         
         $_SESSION['errors'] = $errors;
 
-        if($user){
+        if($user['role'] !== 'admin'){
             $_SESSION['user'] = $user;
             redirect('/');
+            return;
+        }
+        
+        if($user['role'] === 'admin'){
+            $_SESSION['user'] = $user;
+            redirect('/dashboard');
             return;
         }
         
