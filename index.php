@@ -9,6 +9,7 @@ require_once __DIR__ . '/app/Core/Router.php';
 
 add('GET', '/login', 'AuthController', 'login');
 add('POST', '/auth', 'AuthController', 'auth');
+add('GET', '/register', 'AuthController', 'register');
 
 add('GET', '/', 'HomeController', 'index', ['auth']);
 

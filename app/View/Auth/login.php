@@ -118,7 +118,7 @@
 
                 <div class="signup">
                     <p><strong>Belum punya akun Bathrift?</strong>Daftar gratis langsung dapat kupon ongkir 10K</p>
-                    <a class="btn pink" href="#">Daftar sekarang</a>
+                    <a class="btn pink" href="<?= url('/register') ?>">Daftar sekarang</a>
                 </div>
 
                 <div class="meta"><span>Terminal:<br>WEB-CL-99</span><span style="text-align:right">id.bathrift.cc<br>// 2025</span></div>

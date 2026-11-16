@@ -41,7 +41,8 @@ label,
 }
 
 .wrap {
-    max-width: 1000px;
+    width: 100%;
+    max-width: 700px;
     margin: 0 auto;
     display: grid;
     gap: 22px;
