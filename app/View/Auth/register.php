@@ -34,123 +34,266 @@
         <div class="notice-card">INFO PENTING: Cukup 1 ID untuk check-out hunting vintage atau posting lapak baju preloved langsung!</div>
 
         <form action="<?= url('/storeRegister') ?>" method="POST">
-            <div class="field">
-                <label for="nama_lengkap">
-                    <p class="label-info">NAMA LENGKAP <span>*</span></p>
-                    <p class="label-req">SESUAI DI KTP</p>
-                </label>
-                <div class="input">
-                    <input type="text"
-                        id="nama_lengkap"
-                        name="nama_lengkap"
-                        placeholder="Poltepop">
-                    <span class="ico" aria-hidden="true">
-                        <svg width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2.2">
-                            <circle cx="12" cy="12" r="4" />
-                            <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
-                        </svg>
-                    </span>
-                </div>
-            </div>
 
-            <div class="field">
-                <label for="email">
-                    <p class="label-info">EMAIL<span>*</span></p>
-                    <p class="label-req">Required</p>
-                </label>
-                <div class="input">
-                    <input type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Poltepop@gmail.com">
-
-                    <span class="ico" aria-hidden="true">
-                        <svg width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2.2">
-                            <circle cx="12" cy="12" r="4" />
-                            <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
-                        </svg>
-                    </span>
-
-                </div>
-            </div>
-
-
-            <div class="field">
-                <label for="phone">
-                    <p class="label-info">NOMOR WHATSAPP / HP <span>*</span></p>
-                    <p class="label-req">Required</p>
-                </label>
-                <div class="input-phone">
-                    <div class="phone-prefix">
-                        <span>ID</span>
-                        <span>+62</span>
+            <?php if(isset($model['errors']['nama_lengkap'])): ?> 
+                 <div class="field">
+                    <label for="nama_lengkap" class="label-error">
+                        <p class="label-info">NAMA LENGKAP <span>*</span></p>
+                        <p class="label-req">SESUAI DI KTP</p>
+                    </label>
+                    <div class="input input-error">
+                        <input type="text"
+                            id="nama_lengkap"
+                            name="nama_lengkap"
+                            placeholder="Poltepop">
+                        <span class="ico" aria-hidden="true">
+                            <svg width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2">
+                                <circle cx="12" cy="12" r="4" />
+                                <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+                            </svg>
+                        </span>
                     </div>
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="812-3456-7890"
-                        required>
+                     <div class="error">
+                        <p><?= '! ' . $model['errors']['nama_lengkap'] ?></p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <label for="password">
-                    <p class="label-info">PASSWORD <span>*</span></p>
-                    <p class="label-req">Min. 8 Karakter</p>
-                </label>
-                <div class="input">
-                    <input type="password"
-                        id="password"
-                        name="password"
-                        placeholder="">
-                    <span class="ico" aria-hidden="true">
-                        <svg width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2.2">
-                            <circle cx="12" cy="12" r="4" />
-                            <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
-                        </svg>
-                    </span>
+               
+            <?php else: ?>
+                <div class="field">
+                    <label for="nama_lengkap">
+                        <p class="label-info">NAMA LENGKAP <span>*</span></p>
+                        <p class="label-req">SESUAI DI KTP</p>
+                    </label>
+                    <div class="input">
+                        <input type="text"
+                            id="nama_lengkap"
+                            name="nama_lengkap"
+                            placeholder="Poltepop">
+                        <span class="ico" aria-hidden="true">
+                            <svg width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2">
+                                <circle cx="12" cy="12" r="4" />
+                                <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+                            </svg>
+                        </span>
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
 
-            <div class="field">
-                <label for="password-re">
-                    <p class="label-info">KONFIRMASI KATA SANDI<span>*</span></p>
-                    <p class="label-req">Min. 8 Karakter</p>
-                </label>
-                <div class="input">
-                    <input type="password"
-                        id="password-re"
-                        name="password-re"
-                        placeholder="">
-                    <span class="ico" aria-hidden="true">
-                        <svg width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2.2">
-                            <circle cx="12" cy="12" r="4" />
-                            <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
-                        </svg>
-                    </span>
+            <?php if(isset($model['errors']['email'])): ?>
+                <div class="field">
+                    <label for="email" class="label-error">
+                        <p class="label-info">EMAIL<span>*</span></p>
+                        <p class="label-req">Required</p>
+                    </label>
+                    <div class="input input-error">
+                        <input type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Poltepop@gmail.com">
+    
+                        <span class="ico" aria-hidden="true">
+                            <svg width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2">
+                                <circle cx="12" cy="12" r="4" />
+                                <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="error">
+                        <p><?= '! ' . $model['errors']['email'] ?></p>
+                    </div>
                 </div>
-            </div>
+            <?php else: ?>
+                <div class="field">
+                    <label for="email">
+                        <p class="label-info">EMAIL<span>*</span></p>
+                        <p class="label-req">Required</p>
+                    </label>
+                    <div class="input">
+                        <input type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Poltepop@gmail.com">
+    
+                        <span class="ico" aria-hidden="true">
+                            <svg width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2">
+                                <circle cx="12" cy="12" r="4" />
+                                <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            <?php endif; ?>
+
+            <?php if(isset($model['errors']['phone'])): ?>
+                <div class="field">
+                    <label for="phone" class="label-error">
+                        <p class="label-info">NOMOR WHATSAPP / HP <span>*</span></p>
+                        <p class="label-req">Required</p>
+                    </label>
+                    <div class="input-phone">
+                        <div class="phone-prefix">
+                            <span>ID</span>
+                            <span>+62</span>
+                        </div>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="812-3456-7890"
+                            required>
+                    </div>
+                    <div class="error">
+                        <p><?= '! ' . $model['errors']['phone'] ?></p>
+                    </div>
+                </div>
+                <?php else: ?>
+                    <div class="field">
+                        <label for="phone">
+                            <p class="label-info">NOMOR WHATSAPP / HP <span>*</span></p>
+                            <p class="label-req">Required</p>
+                        </label>
+                        <div class="input-phone">
+                            <div class="phone-prefix">
+                                <span>ID</span>
+                                <span>+62</span>
+                            </div>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="812-3456-7890"
+                                required>
+                        </div>
+                    </div>
+            <?php endif; ?>
+
+            <?php if(isset($model['errors']['password'])): ?>
+                <div class="field">
+                    <label for="password" class="label-error">
+                        <p class="label-info">PASSWORD <span>*</span></p>
+                        <p class="label-req">Min. 8 Karakter</p>
+                    </label>
+                    <div class="input input-error">
+                        <input type="password"
+                            id="password"
+                            name="password"
+                            placeholder="">
+                        <span class="ico" aria-hidden="true">
+                            <svg width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2">
+                                <circle cx="12" cy="12" r="4" />
+                                <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="error">
+                        <p><?= '! ' . $model['errors']['password'] ?></p>
+                    </div>
+                </div>
+                <?php else: ?>
+                    <div class="field">
+                        <label for="password">
+                            <p class="label-info">PASSWORD <span>*</span></p>
+                            <p class="label-req">Min. 8 Karakter</p>
+                        </label>
+                        <div class="input">
+                            <input type="password"
+                                id="password"
+                                name="password"
+                                placeholder="">
+                            <span class="ico" aria-hidden="true">
+                                <svg width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.2">
+                                    <circle cx="12" cy="12" r="4" />
+                                    <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+            <?php endif; ?>
+
+
+            <?php if(isset($model['errors']['password-re'])): ?>
+                <div class="field">
+                    <label for="password-re" class="label-error">
+                        <p class="label-info">KONFIRMASI KATA SANDI<span>*</span></p>
+                        <p class="label-req">Min. 8 Karakter</p>
+                    </label>
+                    <div class="input input-error">
+                        <input type="password"
+                            id="password-re"
+                            name="password-re"
+                            placeholder="">
+                        <span class="ico" aria-hidden="true">
+                            <svg width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2.2">
+                                <circle cx="12" cy="12" r="4" />
+                                <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="error">
+                        <p><?= '! ' . $model['errors']['password-re'] ?></p>
+                    </div>
+                </div>
+                <?php else: ?>
+                    <div class="field">
+                        <label for="password-re">
+                            <p class="label-info">KONFIRMASI KATA SANDI<span>*</span></p>
+                            <p class="label-req">Min. 8 Karakter</p>
+                        </label>
+                        <div class="input">
+                            <input type="password"
+                                id="password-re"
+                                name="password-re"
+                                placeholder="">
+                            <span class="ico" aria-hidden="true">
+                                <svg width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2.2">
+                                    <circle cx="12" cy="12" r="4" />
+                                    <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+            <?php endif; ?>
 
             <div class="remember">
                 <label class="check"><input type="checkbox" name="remember">Saya menyetujui Syarat & ketentuan serta kebijakan privasi BaThrift</label>

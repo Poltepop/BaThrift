@@ -3,6 +3,8 @@
     --yellow: #ffd93d;
     --pink: #ff6b9d;
     --pink-soft: #ffe0ec;
+    --pink-soft-err: #ffe5e5;
+    --red-err: #ba1a1a;
     --blue: #c9dcff;
     --paper: #fffdf6;
     --ink: #000;
@@ -395,4 +397,24 @@ input[type="password"]::placeholder {
     background-color: var(--pink);
     border: var(--border);
     box-shadow: var(--shadow);
+}
+
+.error {
+    color: var(--red-err);
+    font-size: 16px;
+    font-weight: bold;
+
+    padding: 20px;
+    background-color: var(--pink-soft-err);
+    border: var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.input-error input {
+    border: 3px solid var(--red-err);
+    box-shadow: 4px 4px 0 var(--red-err);
+}
+
+.label-error .label-info {
+    color: var(--red-err);
 }
