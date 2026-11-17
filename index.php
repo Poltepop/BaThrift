@@ -11,11 +11,13 @@ require_once __DIR__ . '/app/Core/Router.php';
 add('GET', '/login', 'AuthController', 'login');
 add('POST', '/auth', 'AuthController', 'auth');
 add('GET', '/register', 'AuthController', 'register');
+add('POST', '/storeRegister', 'AuthController', 'storeRegister');
 
 // User Route
 add('GET', '/', 'HomeController', 'index', ['auth']);
 
 // Admin Route
 add('GET', '/dashboard', 'dashboardController', 'index', ['admin']);
+
 
 run();
