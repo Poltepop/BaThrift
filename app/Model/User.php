@@ -25,3 +25,27 @@ function userAuthenticate(string $email, string $password): array|null{
     return mysqli_fetch_assoc($result);
 }
 
+function isEmailUnique(string $email): bool{
+    global $conn;
+
+    $stmt = mysqli_prepare($conn, "SELECT * FROM " . USER_TABLE . " WHERE EMAIL = ?");
+    mysqli_stmt_bind_param($stmt, 's', $email);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    if(mysqli_fetch_assoc($result) !== null){
+        return false;
+    }
+
+    return true;
+}
+
+function storeDataUser(string $nl, string $email, string $phone, string $pass): void{
+    global $conn;
+
+    $stmt = mysqli_prepare($conn, "INSERT INTO " . USER_TABLE . " (name, email, password, phone) VALUES (? , ?, ?, ?)");
+    mysqli_stmt_bind_param($stmt, 'ssss', $nl, $email, $pass, $phone);
+    mysqli_stmt_execute($stmt);
+
+}
