@@ -12,6 +12,7 @@ add('GET', '/login', 'AuthController', 'login');
 add('POST', '/auth', 'AuthController', 'auth');
 add('GET', '/register', 'AuthController', 'register');
 add('POST', '/storeRegister', 'AuthController', 'storeRegister');
+add('GET', '/logout', 'AuthController', 'logout');
 
 // User Route
 add('GET', '/', 'HomeController', 'index', ['auth']);

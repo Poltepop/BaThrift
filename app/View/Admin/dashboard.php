@@ -36,7 +36,7 @@
                         <p class="admin-label">MASTER CONTROL</p>
                     </div>
                 </div>
-                <a href="<?url('/logout')?>" class="logout-btn">KELUAR</a>
+                <a href="<?= url('/logout')?>" class="logout-btn">KELUAR</a>
             </div>
         </div>
         <!-- Content -->
