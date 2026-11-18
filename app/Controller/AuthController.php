@@ -66,21 +66,13 @@ function storeRegister(): void{
         $errors = array_filter([
             'nama_lengkap' => validate($nl, required(), max_length(100)),
             'email' => validate($email, required(), min_length(3), max_length(100), email_format()),
-            'phone' => validate($phone, required(), max_length(20)),
+            'phone' => validate($phone, required(), max_length(20), phone_format(), phone_number(),),
             'password' => validate($pass, required(), min_length(8), max_length(255)),
-            'password-re' => validate($pass_re, required(), min_length(8), max_length(255))
+            'password-re' => validate($pass_re, required(), min_length(8), max_length(255), matches($pass, 'Kata Sandi Tidak Cocok! Pastikan sama persis dengan kolom sandi di atas'))
         ]);
 
-        if($pass !== $pass_re){
-            $errors['error_not_match'] = "Password tidak sesuai";
-        }
-
-        if(!is_numeric($phone)){
-            $errors['error_not_number'] = "Nomor Telephone harus berupa angka";
-        }
-
         if(!isEmailUnique($email)){
-            $errors['error_not_unique'] = "Email Sudah Digunakan!";
+            $errors['email'] = "Email Sudah Digunakan!";
         }
 
         if(!empty($errors)){

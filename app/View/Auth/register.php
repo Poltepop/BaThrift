@@ -160,8 +160,7 @@
                             type="tel"
                             id="phone"
                             name="phone"
-                            placeholder="812-3456-7890"
-                            required>
+                            placeholder="812-3456-7890">
                     </div>
                     <div class="error">
                         <p><?= '! ' . $model['errors']['phone'] ?></p>
@@ -182,8 +181,7 @@
                                 type="tel"
                                 id="phone"
                                 name="phone"
-                                placeholder="812-3456-7890"
-                                required>
+                                placeholder="812-3456-7890">
                         </div>
                     </div>
             <?php endif; ?>
