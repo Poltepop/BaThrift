@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="<?= url() ?>/assets/css/Admin/category.css">
     <title><?= $model['title'] ?? '' ?></title>
 </head>
+
 <body>
     <div class="container">
         <!-- Sidebar -->
@@ -26,11 +28,24 @@
                 <li><a href="<?= url() ?>dashboard/pesanan">Pesanan</a></li>
                 <li><a href="<?= url() ?>dashboard/log_aktivitas">Log Aktivitas</a></li>
             </ul>
+
+            <div class="logout">
+                <hr>
+                <div class="account">
+                    <div class="img"></div>
+                    <div>
+                        <p class="admin-name">ADMIN NAME</p>
+                        <p class="admin-label">MASTER CONTROL</p>
+                    </div>
+                </div>
+                <a href="<? url('/logout') ?>" class="logout-btn">KELUAR</a>
+            </div>
         </div>
         <!-- Content -->
-         <div class="content">
+        <div class="content">
             <h1>KATEGORI</h1>
-         </div>
+        </div>
     </div>
 </body>
+
 </html>
