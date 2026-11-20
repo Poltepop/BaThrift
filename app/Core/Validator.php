@@ -18,14 +18,11 @@ function email_format(): callable {
         filter_var($v, FILTER_VALIDATE_EMAIL) ? null : 'Format email tidak valid';
 }
 
-function phone_number(string $msg = 'Nomor telepon harus berupa angka dan tidak boleh mengandung huruf'): callable {
+function phone_format(string $msg = 'Nomor telepon harus berupa angka dan tidak boleh mengandung huruf'): callable {
     return fn(string $v): ?string =>
         (preg_match('/[0-9]/', $v) && !preg_match('/[a-zA-Z]/', $v)) ? null : $msg;
 }
 
-function phone_format(string $msg = 'Nomor telepon harus berupa angka dan tidak boleh mengandung huruf'): callable {
-    return phone_number($msg);
-}
 
 function matches(string $other, string $msg): callable {
     return fn(string $v): ?string => $v === $other ? null : $msg;
