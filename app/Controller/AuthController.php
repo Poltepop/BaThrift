@@ -66,7 +66,7 @@ function storeRegister(): void{
         $errors = array_filter([
             'nama_lengkap' => validate($nl, required(), max_length(100)),
             'email' => validate($email, required(), min_length(3), max_length(100), email_format()),
-            'phone' => validate($phone, required(), max_length(20), phone_format(), phone_number(),),
+            'phone' => validate($phone, required(), max_length(20), phone_format()),
             'password' => validate($pass, required(), min_length(8), max_length(255)),
             'password-re' => validate($pass_re, required(), min_length(8), max_length(255), matches($pass, 'Kata Sandi Tidak Cocok! Pastikan sama persis dengan kolom sandi di atas'))
         ]);
