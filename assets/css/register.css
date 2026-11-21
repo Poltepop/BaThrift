@@ -1,0 +1,786 @@
+/* ==========================================================================
+   BaThrift - Register Neo-Brutalist Stylesheet
+   Tanpa Framework CSS (Pure Native CSS)
+   ========================================================================== */
+
+:root {
+    /* Palette Warna Neo-Brutalisme BaThrift */
+    --warna-latar: #fff9ec;
+    --warna-teks: #1e1c12;
+    --warna-teks-redup: #4d4633;
+    --warna-outline: #7e7761;
+    --warna-border: #000000;
+    --warna-kartu: #ffffff;
+    --warna-utama: #ffd93d;
+    --warna-utama-hover: #ffe173;
+    --warna-aksen-pink: #ff6b9d;
+    --warna-aksen-pink-hover: #ffb1c5;
+    --warna-aksen-hijau: #6bcb77;
+    --warna-aksen-biru: #4d96ff;
+    --warna-tape: #eee8d7;
+    --warna-input-focus: #fffde6;
+    --warna-error: #ba1a1a;
+    --warna-error-bg: #ffdad6;
+    --warna-error-box: #ffe5e5;
+
+    /* Tipografi */
+    --font-judul: 'Space Grotesk', sans-serif;
+    --font-isi: 'DM Sans', sans-serif;
+
+    /* Border & Bayangan Keras (Neo-Brutalist Hard Shadows) */
+    --border-tebal: 3px solid #000000;
+    --border-kartu: 4px solid #000000;
+    --border-sedang: 2.5px solid #000000;
+    --border-tipis: 2px solid #000000;
+    --bayangan-sm: 2px 2px 0px #000000;
+    --bayangan-md: 3px 3px 0px #000000;
+    --bayangan-lg: 4px 4px 0px #000000;
+    --bayangan-kartu: 8px 8px 0px #000000;
+}
+
+/* Reset Dasar */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--warna-latar);
+    color: var(--warna-teks);
+    font-family: var(--font-isi);
+    -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Konfigurasi Material Symbols */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    /* -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased; */
+}
+
+.icon-fill {
+    font-variation-settings: 'FILL' 1;
+}
+
+/* Tata Letak Halaman Register */
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px 40px;
+}
+
+.auth-register-container {
+    width: 100%;
+    max-width: 560px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Stiker / Lencana Melayang Dekoratif Retro (Canvas Backing) */
+.floating-badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-lg);
+    font-family: var(--font-judul);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000000;
+    user-select: none;
+    z-index: 0;
+}
+
+.badge-top-left {
+    top: -42px;
+    left: -48px;
+    background-color: var(--warna-aksen-hijau);
+    transform: rotate(-6deg);
+    padding: 6px 12px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+}
+
+.badge-top-right {
+    top: -34px;
+    right: -40px;
+    background-color: var(--warna-aksen-pink);
+    transform: rotate(8deg);
+    padding: 5px 12px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+}
+
+.badge-mid-right {
+    top: 48%;
+    right: -56px;
+    background-color: var(--warna-aksen-biru);
+    transform: rotate(-12deg);
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+}
+
+/* Kartu Utama Register */
+.register-card {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    background-color: var(--warna-kartu);
+    border: var(--border-kartu);
+    box-shadow: var(--bayangan-kartu);
+    padding: 32px;
+}
+
+/* Lencana Atas Menjorok Keluar */
+.card-slanted-badge-row {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: -54px;
+    margin-bottom: 16px;
+}
+
+.card-slanted-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--warna-aksen-hijau);
+    padding: 6px 14px;
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-lg);
+    transform: rotate(-2.5deg);
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #000000;
+}
+
+/* Header Kartu */
+.register-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.register-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.register-title {
+    font-family: var(--font-judul);
+    font-size: 26px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--warna-teks);
+}
+
+.register-step-badge {
+    display: inline-block;
+    background-color: var(--warna-utama);
+    padding: 2px 8px;
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    color: #000000;
+}
+
+.register-subtitle-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--warna-tape);
+    padding: 4px 10px;
+    border: var(--border-tipis);
+    box-shadow: var(--bayangan-sm);
+    align-self: flex-start;
+    font-family: var(--font-isi);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--warna-teks);
+}
+
+.register-subtitle-pill strong {
+    text-decoration: underline;
+}
+
+/* Kotak Pengumuman / Highlight Banner */
+.register-notice {
+    margin-bottom: 20px;
+    padding: 12px;
+    background-color: var(--warna-utama);
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-md);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.register-notice .material-symbols-outlined {
+    font-size: 20px;
+    color: #000000;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.register-notice-text {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #000000;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Komponen Input Form (Reusable Input Component Styles)
+   ========================================================================== */
+
+.form-register {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-label {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--warna-teks);
+}
+
+.text-required {
+    color: var(--warna-error);
+}
+
+.label-hint {
+    font-family: var(--font-isi);
+    font-size: 11px;
+    color: var(--warna-teks-redup);
+    font-weight: 500;
+}
+
+.badge-error {
+    font-family: var(--font-judul);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--warna-error);
+    background-color: var(--warna-error-bg);
+    padding: 1px 4px;
+    border: 1px solid #000000;
+}
+
+.badge-status {
+    font-family: var(--font-judul);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 1px 4px;
+    border: 1px solid #000000;
+}
+
+.badge-valid {
+    color: #2e7d32;
+    background-color: #e8f5e9;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input-wrapper.has-prefix {
+    display: flex;
+    align-items: stretch;
+    box-shadow: var(--bayangan-md);
+}
+
+.input-prefix {
+    background-color: var(--warna-latar);
+    border: var(--border-tebal);
+    border-right: none;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--warna-teks);
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.form-input {
+    width: 100%;
+    background-color: #ffffff;
+    border: var(--border-tebal);
+    padding: 10px 14px;
+    font-family: var(--font-isi);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--warna-teks);
+    box-shadow: var(--bayangan-md);
+    outline: none;
+    transition: background-color 0.15s, transform 0.1s;
+}
+
+.input-wrapper.has-prefix .form-input {
+    box-shadow: none;
+}
+
+.form-input::placeholder {
+    color: var(--warna-outline);
+    font-weight: 500;
+    opacity: 1;
+}
+
+.form-input:focus {
+    background-color: var(--warna-input-focus);
+    transform: translate(1px, 1px);
+}
+
+.form-input.input-with-icon {
+    padding-right: 42px;
+}
+
+.form-input.input-with-action {
+    padding-right: 42px;
+}
+
+.form-input.input-error {
+    background-color: #fff5f5;
+    border-color: var(--warna-error);
+    box-shadow: 3px 3px 0px var(--warna-error);
+}
+
+.input-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000000;
+    font-size: 20px;
+    pointer-events: none;
+}
+
+.input-status-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 2px;
+    border: var(--border-tipis);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-valid {
+    background-color: var(--warna-aksen-hijau);
+    color: #000000;
+}
+
+.status-valid .material-symbols-outlined {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.status-invalid {
+    background-color: var(--warna-error-bg);
+    color: var(--warna-error);
+    border-color: var(--warna-error);
+}
+
+.btn-toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #000000;
+    cursor: pointer;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-toggle-password .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.btn-toggle-password:hover {
+    color: var(--warna-aksen-pink);
+}
+
+.input-error-box {
+    margin-top: 4px;
+    background-color: var(--warna-error-box);
+    border: var(--border-tipis);
+    padding: 10px;
+    box-shadow: var(--bayangan-sm);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-error-box .material-symbols-outlined {
+    color: var(--warna-error);
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.error-text {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--warna-error);
+    line-height: 1.3;
+}
+
+/* ==========================================================================
+   Checkbox Syarat & Ketentuan
+   ========================================================================== */
+
+.terms-wrapper {
+    padding-top: 4px;
+}
+
+.terms-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.checkbox-bathrift {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff;
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-sm);
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s;
+}
+
+.checkbox-bathrift:checked {
+    background-color: var(--warna-utama);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.terms-text {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--warna-teks);
+    line-height: 1.4;
+    user-select: none;
+}
+
+.terms-link {
+    font-weight: 700;
+    text-decoration: underline;
+    color: #000000;
+    padding: 0 2px;
+}
+
+.terms-link:hover {
+    background-color: var(--warna-utama);
+}
+
+/* Tombol CTA Daftar Utama */
+.btn-submit-register {
+    width: 100%;
+    background-color: var(--warna-utama);
+    color: #000000;
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 14px;
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-lg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.15s, transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-submit-register:hover {
+    background-color: var(--warna-utama-hover);
+}
+
+.btn-submit-register:active {
+    transform: translate(2px, 2px);
+    box-shadow: var(--bayangan-sm);
+}
+
+/* Pemisah Atau Daftar Dengan */
+.register-divider {
+    position: relative;
+    margin: 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divider-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 0;
+    border-top: var(--border-tebal);
+}
+
+.divider-pill {
+    position: relative;
+    background-color: #ffffff;
+    padding: 2px 12px;
+    border: var(--border-tipis);
+    box-shadow: var(--bayangan-sm);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #000000;
+}
+
+/* Tombol Masuk Pihak Ketiga (OAuth) */
+.social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.btn-social-reg {
+    background-color: #ffffff;
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-md);
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s, transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-social-reg:hover {
+    background-color: var(--warna-latar);
+}
+
+.btn-social-reg:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px #000000;
+}
+
+.social-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* Kotak Pengalihan ke Halaman Login */
+.login-redirect-card {
+    border-top: var(--border-tebal);
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background-color: var(--warna-tape);
+    border: var(--border-tipis);
+    box-shadow: var(--bayangan-md);
+    flex-wrap: wrap;
+}
+
+.redirect-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-isi);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--warna-teks);
+}
+
+.btn-login-redirect {
+    background-color: var(--warna-aksen-pink);
+    color: #000000;
+    padding: 6px 16px;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border: var(--border-tipis);
+    box-shadow: var(--bayangan-sm);
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.15s, transform 0.1s;
+}
+
+.btn-login-redirect:hover {
+    background-color: var(--warna-aksen-pink-hover);
+}
+
+.btn-login-redirect:active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+}
+
+/* Strip Barcode Bawah */
+.register-barcode-strip {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding: 0 8px;
+    opacity: 0.85;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.barcode-cluster {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.barcode-bars {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 24px;
+}
+
+.barcode-bar {
+    height: 100%;
+    background-color: #000000;
+    display: inline-block;
+}
+
+.bar-xs { width: 2px; }
+.bar-sm { width: 4px; }
+.bar-md { width: 6px; }
+.bar-lg { width: 8px; }
+.bar-xl { width: 12px; }
+
+.barcode-code {
+    font-family: var(--font-judul);
+    font-weight: 900;
+    margin-left: 8px;
+    letter-spacing: 0.1em;
+    color: #000000;
+}
+
+.barcode-tagline {
+    font-family: var(--font-judul);
+    font-weight: 700;
+    color: var(--warna-teks-redup);
+}
+
+/* Responsivitas */
+@media (max-width: 1024px) {
+    .floating-badge {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .register-card {
+        padding: 24px 18px;
+    }
+    .auth-wrapper {
+        padding: 50px 14px 30px;
+    }
+    .social-grid {
+        grid-template-columns: 1fr;
+    }
+    .login-redirect-card {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .btn-login-redirect {
+        width: 100%;
+    }
+    .register-barcode-strip {
+        flex-direction: column;
+        gap: 6px;
+        align-items: center;
+    }
+}

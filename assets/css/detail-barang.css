@@ -1,0 +1,1436 @@
+/* ==========================================================================
+   BaThrift - Detail Barang Stylesheet
+   Gaya: Neo-Brutalisme Murni (Native CSS, Tanpa Tailwind)
+   ========================================================================== */
+
+:root {
+    /* Palette Warna Neo-Brutalisme BaThrift */
+    --warna-latar: #fff9ec;
+    --warna-teks: #1e1c12;
+    --warna-teks-redup: #4d4633;
+    --warna-outline: #7e7761;
+    --warna-border: #1e1c12;
+    --warna-kartu: #ffffff;
+    --warna-utama: #ffd93d;
+    --warna-utama-hover: #e8c426;
+    --warna-utama-muda: #ffe173;
+    --warna-aksen-pink: #ff6b9d;
+    --warna-aksen-pink-hover: #ac2a5d;
+    --warna-aksen-pink-muda: #ffd9e1;
+    --warna-aksen-biru: #ccdcff;
+    --warna-aksen-biru-hover: #a9c7ff;
+    --warna-aksen-biru-teks: #005fbb;
+    --warna-hijau-mint: #6BCB77;
+    --warna-surface-container: #f4eddd;
+    --warna-surface-high: #eee8d7;
+    --warna-surface-highest: #e9e2d2;
+    --warna-surface-dim: #e0dac9;
+    --warna-error: #ba1a1a;
+    --warna-error-bg: #ffdad6;
+    --warna-error-container: #ffdad6;
+    --warna-on-error-container: #93000a;
+
+    /* Tipografi */
+    --font-judul: 'Space Grotesk', sans-serif;
+    --font-isi: 'DM Sans', sans-serif;
+
+    /* Border & Bayangan Keras */
+    --border-tebal: 4px solid var(--warna-border);
+    --border-kartu: 3px solid var(--warna-border);
+    --border-sedang: 2.5px solid var(--warna-border);
+    --border-tipis: 2px solid var(--warna-border);
+    --bayangan-xs: 1px 1px 0px var(--warna-border);
+    --bayangan-sm: 2px 2px 0px var(--warna-border);
+    --bayangan-md: 3px 3px 0px var(--warna-border);
+    --bayangan-lg: 4px 4px 0px var(--warna-border);
+    --bayangan-xl: 6px 6px 0px var(--warna-border);
+    --bayangan-2xl: 8px 8px 0px var(--warna-border);
+}
+
+/* Reset Dasar */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--warna-latar);
+    color: var(--warna-teks);
+    font-family: var(--font-isi);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   MAIN DETAIL CONTAINER & SPACING
+   ========================================================================== */
+.detail-main {
+    width: 100%;
+    padding-top: 105px;
+    background-color: var(--warna-latar);
+    min-height: calc(100vh - 80px);
+    padding-bottom: 80px;
+}
+
+@media (min-width: 768px) {
+    .detail-main {
+        padding-bottom: 40px;
+    }
+}
+
+.detail-wrapper {
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ==========================================================================
+   SIMULATION CONTROLLER (PREVIEW TESTING BAR)
+   ========================================================================== */
+.sim-controller {
+    width: 100%;
+    background-color: var(--warna-surface-highest);
+    border: var(--border-kartu);
+    box-shadow: var(--bayangan-lg);
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+@media (min-width: 640px) {
+    .sim-controller {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.sim-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.sim-tag {
+    background-color: var(--warna-utama);
+    padding: 2px 8px;
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transform: rotate(-2deg);
+}
+
+.sim-label {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.sim-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-sim-state {
+    padding: 5px 12px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    border: var(--border-tipis);
+    background-color: var(--warna-kartu);
+    color: var(--warna-teks);
+    box-shadow: var(--bayangan-sm);
+    transition: all 0.15s ease;
+}
+
+.btn-sim-state.sim-active {
+    background-color: var(--warna-utama);
+}
+
+.btn-sim-state:active {
+    transform: translate(1.5px, 1.5px);
+    box-shadow: none;
+}
+
+/* ==========================================================================
+   BREADCRUMBS
+   ========================================================================== */
+.breadcrumb-nav {
+    width: 100%;
+    background-color: var(--warna-kartu);
+    border: var(--border-tipis);
+    padding: 10px 16px;
+    box-shadow: var(--bayangan-sm);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.breadcrumb-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.breadcrumb-link:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-link .material-symbols-outlined {
+    font-size: 14px;
+}
+
+.breadcrumb-sep {
+    color: var(--warna-outline);
+}
+
+.breadcrumb-current {
+    background-color: var(--warna-utama);
+    padding: 2px 8px;
+    border: 1px solid var(--warna-border);
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (min-width: 640px) {
+    .breadcrumb-current {
+        max-width: none;
+    }
+}
+
+/* ==========================================================================
+   STATE NOTIFICATION BANNERS
+   ========================================================================== */
+.state-banner {
+    width: 100%;
+    border: var(--border-kartu);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.state-banner.is-hidden {
+    display: none;
+}
+
+.banner-sold {
+    background-color: var(--warna-teks);
+    color: var(--warna-latar);
+    box-shadow: 5px 5px 0px var(--warna-utama);
+}
+
+.banner-sold-icon {
+    width: 46px;
+    height: 46px;
+    background-color: var(--warna-aksen-pink);
+    border: 2px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transform: rotate(-4deg);
+    color: var(--warna-teks);
+}
+
+.banner-sold-title {
+    font-family: var(--font-judul);
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--warna-utama);
+}
+
+.banner-sold-desc {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    color: var(--warna-surface-container);
+    margin: 4px 0 0 0;
+}
+
+.banner-owner {
+    background-color: var(--warna-aksen-biru);
+    color: var(--warna-teks);
+    box-shadow: var(--bayangan-lg);
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.banner-owner-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.banner-owner-icon {
+    width: 46px;
+    height: 46px;
+    background-color: var(--warna-utama);
+    border: var(--border-tipis);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transform: rotate(3deg);
+}
+
+.banner-owner-title {
+    font-family: var(--font-judul);
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.banner-owner-desc {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    color: var(--warna-teks-redup);
+    margin: 2px 0 0 0;
+}
+
+.banner-owner-status-badge {
+    background-color: var(--warna-kartu);
+    padding: 6px 14px;
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   MAIN DETAIL CARD (DUAL-COLUMN LAYOUT)
+   ========================================================================== */
+.product-detail-card {
+    background-color: var(--warna-kartu);
+    border: var(--border-kartu);
+    box-shadow: var(--bayangan-xl);
+    padding: 24px;
+}
+
+@media (min-width: 768px) {
+    .product-detail-card {
+        padding: 32px;
+    }
+}
+
+.product-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+}
+
+@media (min-width: 1024px) {
+    .product-detail-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ==========================================================================
+   LEFT COLUMN: GALLERY & SELLER
+   ========================================================================== */
+.gallery-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.main-image-viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: var(--warna-surface-container);
+    border: var(--border-kartu);
+    overflow: hidden;
+    box-shadow: var(--bayangan-lg);
+}
+
+.main-product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.15s ease;
+}
+
+.main-image-viewport:hover .main-product-img {
+    transform: scale(1.03);
+}
+
+/* Badges on Gallery */
+.gallery-badge-cond {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+    border: var(--border-tipis);
+    padding: 4px 10px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transform: rotate(-3deg);
+    box-shadow: var(--bayangan-md);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.gallery-badge-cond .icon-defect {
+    color: var(--warna-error);
+    font-size: 16px;
+}
+
+.gallery-badge-auth {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    background-color: var(--warna-kartu);
+    color: var(--warna-teks);
+    border: var(--border-tipis);
+    padding: 4px 10px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.gallery-badge-auth .icon-auth {
+    color: var(--warna-aksen-biru-teks);
+    font-size: 16px;
+}
+
+/* Sold Stamp Overlay on Gallery */
+.gallery-sold-stamp {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(30, 28, 18, 0.75);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(2px);
+}
+
+.gallery-sold-stamp.is-hidden {
+    display: none;
+}
+
+.stamp-box {
+    border: 4px solid var(--warna-error);
+    background-color: var(--warna-kartu);
+    padding: 16px 28px;
+    transform: rotate(-12deg);
+    box-shadow: 8px 8px 0px var(--warna-error);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: pulse-stamp 1.8s infinite ease-in-out;
+}
+
+@keyframes pulse-stamp {
+    0%, 100% { transform: rotate(-12deg) scale(1); }
+    50% { transform: rotate(-12deg) scale(1.03); }
+}
+
+.stamp-main-text {
+    font-family: var(--font-judul);
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--warna-error);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1;
+}
+
+.stamp-sub-text {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    background-color: var(--warna-utama);
+    padding: 2px 8px;
+    border: 1px solid var(--warna-border);
+    margin-top: 6px;
+}
+
+/* Floating Action Controls on Image */
+.gallery-floating-actions {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-gallery-action {
+    background-color: var(--warna-kartu);
+    color: var(--warna-teks);
+    border: var(--border-tipis);
+    padding: 4px 10px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.1s ease;
+}
+
+.btn-gallery-action:hover {
+    background-color: var(--warna-utama);
+}
+
+.btn-gallery-action:active {
+    transform: translate(1.5px, 1.5px);
+    box-shadow: none;
+}
+
+/* Thumbnail Strip */
+.thumbnail-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.thumb-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    background-color: var(--warna-surface-container);
+    border: var(--border-tipis);
+    overflow: hidden;
+    box-shadow: var(--bayangan-sm);
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.thumb-item.thumb-active {
+    border: 3px solid var(--warna-utama);
+    outline: 2px solid var(--warna-border);
+}
+
+.thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.thumb-item:hover .thumb-img {
+    transform: scale(1.06);
+}
+
+.thumb-tag-badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--warna-border);
+    color: var(--warna-latar);
+    font-family: var(--font-judul);
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 2px 0;
+    letter-spacing: 0.05em;
+}
+
+.thumb-tag-badge.badge-tag-minus {
+    background-color: var(--warna-error);
+    color: #ffffff;
+}
+
+/* Seller Profile Card */
+.seller-profile-card {
+    background-color: var(--warna-surface-container);
+    border: var(--border-kartu);
+    padding: 16px;
+    box-shadow: var(--bayangan-md);
+    margin-top: 8px;
+}
+
+.seller-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.seller-profile-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.seller-avatar-badge {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    background-color: var(--warna-utama);
+    border: var(--border-tipis);
+    box-shadow: var(--bayangan-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-judul);
+    font-size: 16px;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.seller-verify-check {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--warna-aksen-biru-teks);
+    border: 1px solid var(--warna-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.seller-meta-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.seller-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.seller-shop-name {
+    font-family: var(--font-judul);
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.seller-pro-tag {
+    background-color: var(--warna-aksen-biru);
+    color: var(--warna-teks);
+    font-family: var(--font-judul);
+    font-size: 10px;
+    font-weight: 800;
+    padding: 1px 6px;
+    border: 1px solid var(--warna-border);
+    text-transform: uppercase;
+}
+
+.seller-stats-sub {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-isi);
+    font-size: 12px;
+    color: var(--warna-teks-redup);
+    margin-top: 2px;
+}
+
+.seller-rating-star {
+    font-weight: 800;
+    color: var(--warna-border);
+}
+
+.seller-loc-pill {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.seller-loc-pill .material-symbols-outlined {
+    font-size: 14px;
+}
+
+.btn-visit-shop {
+    padding: 6px 14px;
+    background-color: var(--warna-kartu);
+    color: var(--warna-teks);
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+}
+
+.btn-visit-shop:hover {
+    background-color: var(--warna-utama);
+}
+
+.btn-visit-shop:active {
+    transform: translate(1.5px, 1.5px);
+    box-shadow: none;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: SPECS, PRICE, WARNING BOX, ACTIONS
+   ========================================================================== */
+.specs-column {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.category-availability-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.badge-cat-tag {
+    background-color: var(--warna-aksen-biru);
+    color: var(--warna-teks);
+    padding: 4px 10px;
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+}
+
+.badge-availability {
+    padding: 4px 10px;
+    border: var(--border-kartu);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-availability.avail-ready {
+    background-color: var(--warna-hijau-mint);
+    color: var(--warna-teks);
+}
+
+.badge-availability.avail-sold {
+    background-color: var(--warna-teks);
+    color: var(--warna-latar);
+}
+
+.badge-availability.avail-owner {
+    background-color: var(--warna-aksen-biru);
+    color: var(--warna-teks);
+}
+
+.ping-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--warna-border);
+    animation: ping 1.2s infinite cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.product-detail-title {
+    font-family: var(--font-judul);
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+@media (min-width: 768px) {
+    .product-detail-title {
+        font-size: 34px;
+    }
+}
+
+/* Quick Spec Pills */
+.quick-spec-pills {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.spec-pill {
+    padding: 4px 10px;
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.pill-surface {
+    background-color: var(--warna-surface-highest);
+    color: var(--warna-teks);
+}
+
+.pill-minus {
+    background-color: var(--warna-error-container);
+    color: var(--warna-on-error-container);
+}
+
+.pill-yellow {
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+}
+
+/* Price Box */
+.price-display-box {
+    background-color: var(--warna-surface-container);
+    border: var(--border-kartu);
+    padding: 16px 20px;
+    box-shadow: var(--bayangan-md);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.price-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.price-label {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--warna-teks-redup);
+}
+
+.price-number {
+    font-family: var(--font-judul);
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-top: 4px;
+}
+
+.badge-nego-tipis {
+    background-color: var(--warna-aksen-pink-muda);
+    color: var(--warna-teks);
+    border: var(--border-tipis);
+    padding: 4px 10px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transform: rotate(2deg);
+    box-shadow: var(--bayangan-sm);
+}
+
+/* Defect Transparency Warning Box */
+.defect-warning-box {
+    background-color: var(--warna-utama);
+    border: var(--border-kartu);
+    box-shadow: var(--bayangan-md);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.defect-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--warna-border);
+    padding-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.defect-title-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.defect-title-group .icon-warning {
+    color: var(--warna-error);
+    font-size: 20px;
+}
+
+.defect-real-photo-tag {
+    background-color: var(--warna-kartu);
+    padding: 2px 6px;
+    border: 1px solid var(--warna-border);
+    font-family: var(--font-judul);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.defect-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--font-isi);
+    font-size: 13px;
+    color: var(--warna-teks);
+}
+
+.defect-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+}
+
+.defect-bullet {
+    font-weight: 800;
+}
+
+/* Product Description Accordion/Box */
+.product-desc-box {
+    border: var(--border-tipis);
+    padding: 16px;
+    background-color: var(--warna-kartu);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.desc-box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--warna-border);
+    padding-bottom: 6px;
+}
+
+.desc-box-title {
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.desc-code {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    color: var(--warna-teks-redup);
+}
+
+.desc-content {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    color: var(--warna-teks-redup);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.dimensions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.dim-pill {
+    padding: 6px;
+    background-color: var(--warna-surface-container);
+    border: 1px solid var(--warna-border);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* ==========================================================================
+   ACTION BUTTONS CONTAINER (STATE SWITCHABLE)
+   ========================================================================== */
+.actions-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.actions-container.is-hidden {
+    display: none;
+}
+
+.actions-row-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+@media (min-width: 640px) {
+    .actions-row-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.btn-act-cart {
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+    border: var(--border-kartu);
+    padding: 12px;
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.15s ease;
+}
+
+.btn-act-cart:hover {
+    background-color: var(--warna-utama-hover);
+}
+
+.btn-act-cart:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+.btn-act-buy {
+    background-color: var(--warna-aksen-pink);
+    color: var(--warna-teks);
+    border: var(--border-kartu);
+    padding: 12px;
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.15s ease;
+}
+
+.btn-act-buy:hover {
+    background-color: #ff85af;
+}
+
+.btn-act-buy:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+.btn-act-nego {
+    width: 100%;
+    background-color: var(--warna-kartu);
+    color: var(--warna-teks);
+    border: var(--border-tipis);
+    padding: 10px;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+
+.btn-act-nego:hover {
+    background-color: var(--warna-surface-container);
+}
+
+.btn-act-nego:active {
+    transform: translate(1.5px, 1.5px);
+    box-shadow: none;
+}
+
+.report-item-row {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 4px;
+}
+
+.link-report-item {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--warna-teks-redup);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: underline;
+}
+
+.link-report-item:hover {
+    color: var(--warna-error);
+}
+
+/* Sold State Buttons */
+.btn-disabled-sold {
+    background-color: var(--warna-surface-dim);
+    color: var(--warna-teks-redup);
+    border: var(--border-kartu);
+    padding: 12px;
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: not-allowed;
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: line-through;
+}
+
+.btn-alert-similar {
+    width: 100%;
+    background-color: var(--warna-kartu);
+    color: var(--warna-teks);
+    border: var(--border-tipis);
+    padding: 10px;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+
+.btn-alert-similar:hover {
+    background-color: var(--warna-utama);
+}
+
+.btn-alert-similar:active {
+    transform: translate(1.5px, 1.5px);
+    box-shadow: none;
+}
+
+/* Owner State Buttons */
+.owner-panel-tag {
+    padding: 6px;
+    background-color: var(--warna-aksen-biru);
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn-owner-edit {
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+    border: var(--border-kartu);
+    padding: 12px;
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+
+.btn-owner-edit:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+.btn-owner-stats {
+    background-color: var(--warna-kartu);
+    color: var(--warna-teks);
+    border: var(--border-kartu);
+    padding: 12px;
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+
+.btn-owner-stats:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+.btn-owner-delete {
+    width: 100%;
+    background-color: var(--warna-error-container);
+    color: var(--warna-on-error-container);
+    border: var(--border-tipis);
+    padding: 10px;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+}
+
+.btn-owner-delete:hover {
+    background-color: var(--warna-error);
+    color: #ffffff;
+}
+
+.btn-owner-delete:active {
+    transform: translate(1.5px, 1.5px);
+    box-shadow: none;
+}
+
+/* ==========================================================================
+   BUYER PROTECTION & GUARANTEE TRIPLE BADGE
+   ========================================================================== */
+.buyer-protection-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    .buyer-protection-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.protection-card {
+    background-color: var(--warna-kartu);
+    border: var(--border-kartu);
+    box-shadow: var(--bayangan-lg);
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.protection-icon-box {
+    width: 48px;
+    height: 48px;
+    border: var(--border-tipis);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: var(--bayangan-sm);
+}
+
+.protection-icon-box.icon-yellow {
+    background-color: var(--warna-utama);
+    transform: rotate(-3deg);
+}
+
+.protection-icon-box.icon-pink {
+    background-color: var(--warna-aksen-pink);
+    transform: rotate(3deg);
+}
+
+.protection-icon-box.icon-blue {
+    background-color: var(--warna-aksen-biru);
+    transform: rotate(-2deg);
+}
+
+.protection-icon-box .material-symbols-outlined {
+    font-size: 28px;
+    color: var(--warna-teks);
+}
+
+.protection-title {
+    font-family: var(--font-judul);
+    font-size: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 2px 0;
+}
+
+.protection-desc {
+    font-family: var(--font-isi);
+    font-size: 12px;
+    color: var(--warna-teks-redup);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   ZOOM LIGHTBOX MODAL
+   ========================================================================== */
+.zoom-dialog {
+    position: fixed;
+    inset: 0;
+    z-index: 250;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.zoom-dialog[open] {
+    display: flex;
+}
+
+.zoom-modal-card {
+    background-color: var(--warna-kartu);
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-2xl);
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.zoom-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: var(--warna-surface-container);
+    border-bottom: 2px solid var(--warna-border);
+}
+
+.zoom-title {
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.btn-zoom-close {
+    width: 32px;
+    height: 32px;
+    background-color: var(--warna-kartu);
+    border: var(--border-tipis);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--bayangan-sm);
+    transition: all 0.1s ease;
+}
+
+.btn-zoom-close:hover {
+    background-color: var(--warna-error-container);
+}
+
+.btn-zoom-close:active {
+    transform: translate(1.5px, 1.5px);
+    box-shadow: none;
+}
+
+.zoom-body {
+    padding: 16px;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
+
+.zoom-full-img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+}
