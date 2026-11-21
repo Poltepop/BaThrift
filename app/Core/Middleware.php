@@ -1,13 +1,7 @@
 <?php
 function middlewareAuth(): void {
     if (empty($_SESSION['user'])) {
-        redirect('/login');
-    }
-}
-
-function middlewareGuest(): void {
-    if (!empty($_SESSION['user'])) {
-        redirect('/');
+        redirect('/auth/login');
     }
 }
 

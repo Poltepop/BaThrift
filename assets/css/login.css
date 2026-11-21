@@ -1,0 +1,912 @@
+/* ==========================================================================
+   BaThrift - Neo-Brutalist Global Stylesheet
+   Tanpa Framework CSS (Pure Native CSS)
+   ========================================================================== */
+
+:root {
+    /* Palette Warna Neo-Brutalisme BaThrift */
+    --warna-latar: #fff9ec;
+    --warna-teks: #1e1c12;
+    --warna-teks-redup: #4d4633;
+    --warna-outline: #7e7761;
+    --warna-border: #000000;
+    --warna-kartu: #ffffff;
+    --warna-utama: #ffd93d;
+    --warna-utama-hover: #e8c426;
+    --warna-aksen-pink: #ff6b9d;
+    --warna-aksen-pink-hover: #ac2a5d;
+    --warna-aksen-pink-muda: rgba(255, 107, 157, 0.18);
+    --warna-aksen-biru: #ccdcff;
+    --warna-aksen-biru-teks: #005fbb;
+    --warna-tape: #eee8d7;
+    --warna-input-focus: #faf3e2;
+    --warna-error: #ba1a1a;
+    --warna-error-bg: #ffdad6;
+
+    /* Tipografi */
+    --font-judul: 'Space Grotesk', sans-serif;
+    --font-isi: 'DM Sans', sans-serif;
+
+    /* Border & Bayangan Keras (Neo-Brutalist Hard Shadows) */
+    --border-tebal: 3px solid #000000;
+    --border-sedang: 2.5px solid #000000;
+    --border-tipis: 2px solid #000000;
+    --bayangan-sm: 2px 2px 0px #000000;
+    --bayangan-md: 3px 3px 0px #000000;
+    --bayangan-lg: 4px 4px 0px #000000;
+    --bayangan-xl: 6px 6px 0px #000000;
+}
+
+/* Reset Dasar */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--warna-latar);
+    color: var(--warna-teks);
+    font-family: var(--font-isi);
+    -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Konfigurasi Material Symbols */
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    /* -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased; */
+}
+
+.icon-fill {
+    font-variation-settings: 'FILL' 1;
+}
+
+/* ==========================================================================
+   Tata Letak Halaman Auth
+   ========================================================================== */
+
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Running Marquee Banner */
+.auth-marquee {
+    width: 100%;
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+    overflow: hidden;
+    padding: 6px 12px;
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-lg);
+    margin-bottom: 16px;
+    user-select: none;
+}
+
+.marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    white-space: nowrap;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.marquee-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Grid Layout */
+.auth-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: 24px;
+    align-items: stretch;
+    width: 100%;
+    min-height: 1000px;
+}
+
+/* ==========================================================================
+   Panel Kiri: Poster Vintage Neo-Brutalis
+   ========================================================================== */
+
+.auth-poster {
+    background-color: var(--warna-utama);
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-xl);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.poster-watermark {
+    position: absolute;
+    right: -36px;
+    top: -36px;
+    width: 200px;
+    height: 200px;
+    border: 4px dashed #000000;
+    border-radius: 50%;
+    opacity: 0.15;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(12deg);
+    font-family: var(--font-judul);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+}
+
+.poster-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.poster-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--warna-kartu);
+    padding: 4px 10px;
+    border: var(--border-tipis);
+    box-shadow: var(--bayangan-sm);
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.poster-pill-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: var(--warna-aksen-pink);
+    border: 1px solid #000000;
+    display: inline-block;
+}
+
+.poster-tag {
+    background-color: var(--warna-aksen-pink);
+    color: var(--warna-teks);
+    padding: 2px 8px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    border: var(--border-tipis);
+    transform: rotate(3deg);
+}
+
+.poster-content {
+    margin: 44px 0;
+    position: relative;
+    z-index: 10;
+}
+
+.poster-badge {
+    display: inline-block;
+    background-color: var(--warna-kartu);
+    padding: 4px 12px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    border: var(--border-tipis);
+    transform: rotate(-2deg);
+    margin-bottom: 8px;
+}
+
+.poster-title {
+    font-family: var(--font-judul);
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: var(--warna-teks);
+}
+
+.poster-highlight {
+    display: inline-block;
+    background-color: var(--warna-aksen-pink);
+    padding: 0 8px;
+    margin: 4px 0;
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-md);
+    transform: rotate(-1deg);
+}
+
+.poster-desc {
+    font-family: var(--font-isi);
+    font-size: 15px;
+    line-height: 1.5;
+    margin-top: 16px;
+    padding-right: 16px;
+    color: var(--warna-teks);
+}
+
+.poster-stickers {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 24px 0;
+    position: relative;
+    z-index: 10;
+}
+
+.sticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: var(--border-tipis);
+    box-shadow: var(--bayangan-md);
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.sticker-white {
+    background-color: var(--warna-kartu);
+    transform: rotate(-2.5deg);
+}
+
+.sticker-white .material-symbols-outlined {
+    color: var(--warna-aksen-pink);
+    font-size: 18px;
+}
+
+.sticker-blue {
+    background-color: var(--warna-aksen-biru);
+    color: var(--warna-aksen-biru-teks);
+    transform: rotate(1.5deg);
+}
+
+.sticker-blue .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.sticker-pink {
+    background-color: var(--warna-aksen-pink);
+    color: var(--warna-teks);
+    transform: rotate(-3deg);
+}
+
+.sticker-pink .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.poster-footer {
+    border-top: var(--border-tebal);
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+    z-index: 10;
+}
+
+.barcode-lines {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 32px;
+    margin-bottom: 4px;
+}
+
+.barcode-bar {
+    height: 100%;
+    background-color: var(--warna-teks);
+    display: inline-block;
+}
+
+.bar-xs { width: 2px; }
+.bar-sm { width: 4px; }
+.bar-md { width: 6px; }
+.bar-lg { width: 8px; }
+.bar-xl { width: 10px; }
+
+.barcode-label {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.receipt-seal {
+    background-color: var(--warna-kartu);
+    padding: 4px 10px;
+    text-align: center;
+    border: var(--border-tipis);
+    transform: rotate(-4deg);
+}
+
+.receipt-seal-top {
+    font-family: var(--font-judul);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.receipt-seal-bottom {
+    font-family: var(--font-judul);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--warna-aksen-pink-hover);
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Panel Kanan: Kartu Form Login
+   ========================================================================== */
+
+.auth-card-panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.auth-card {
+    background-color: var(--warna-kartu);
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-xl);
+    padding: 40px 36px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: var(--border-tebal);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+.card-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-pill {
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+    padding: 2px 8px;
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.status-code {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--warna-outline);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.card-topbar-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid #000000;
+    display: inline-block;
+}
+
+.dot-pink { background-color: var(--warna-aksen-pink); }
+.dot-yellow { background-color: var(--warna-utama); }
+.dot-blue { background-color: var(--warna-aksen-biru); }
+
+.card-header {
+    margin-bottom: 28px;
+}
+
+.card-title {
+    font-family: var(--font-judul);
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: var(--warna-teks);
+}
+
+.card-subtitle {
+    font-family: var(--font-isi);
+    font-size: 15px;
+    color: var(--warna-teks-redup);
+    margin: 6px 0 0 0;
+    line-height: 1.4;
+}
+
+.alert-error {
+    background-color: var(--warna-error-bg);
+    color: var(--warna-error);
+    border: 2px solid var(--warna-error);
+    padding: 12px;
+    font-family: var(--font-isi);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.form-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-label {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warna-teks);
+}
+
+.form-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.link-lupa-sandi {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--warna-aksen-pink-hover);
+    text-decoration: none;
+}
+
+.link-lupa-sandi:hover {
+    text-decoration: underline;
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.form-input {
+    width: 100%;
+    background-color: var(--warna-latar);
+    padding: 13px 44px 13px 16px;
+    border: var(--border-tebal);
+    font-family: var(--font-isi);
+    font-size: 15px;
+    color: var(--warna-teks);
+    outline: none;
+    transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+.form-input::placeholder {
+    color: var(--warna-outline);
+    opacity: 1;
+}
+
+.form-input:focus {
+    background-color: var(--warna-input-focus);
+    box-shadow: var(--bayangan-md);
+}
+
+.input-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--warna-outline);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.btn-toggle-password {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 4px;
+    color: var(--warna-teks);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-toggle-password:hover {
+    color: var(--warna-aksen-pink-hover);
+}
+
+.form-remember-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 4px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--warna-teks);
+}
+
+.checkbox-bathrift {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: var(--warna-latar);
+    border: var(--border-sedang);
+    cursor: pointer;
+    transition: background-color 0.15s;
+    margin: 0;
+}
+
+.checkbox-bathrift:checked {
+    background-color: var(--warna-aksen-pink);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.secure-badge {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--warna-outline);
+    background-color: var(--warna-tape);
+    padding: 2px 6px;
+    border: 1px solid #000000;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--warna-utama);
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-lg);
+    padding: 14px 20px;
+    font-family: var(--font-judul);
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--warna-teks);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.15s, transform 0.1s, box-shadow 0.1s;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: var(--warna-utama-hover);
+}
+
+.btn-submit:active {
+    transform: translate(2px, 2px);
+    box-shadow: var(--bayangan-sm);
+}
+
+.btn-submit .material-symbols-outlined {
+    font-weight: 700;
+}
+
+/* Pemisah Atau Masuk Dengan */
+.auth-divider {
+    position: relative;
+    margin: 28px 0;
+    text-align: center;
+}
+
+.auth-divider-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 0;
+    border-top: var(--border-sedang);
+}
+
+.auth-divider-text {
+    position: relative;
+    display: inline-block;
+    background-color: var(--warna-kartu);
+    padding: 2px 12px;
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    transform: rotate(1deg);
+}
+
+/* Tombol Sosial Media */
+.social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.btn-social {
+    background-color: var(--warna-latar);
+    border: var(--border-sedang);
+    box-shadow: var(--bayangan-md);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--warna-teks);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s, transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-social:hover {
+    background-color: var(--warna-input-focus);
+}
+
+.btn-social:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px #000000;
+}
+
+.social-icon {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+/* Banner Pendaftaran Akun */
+.register-banner {
+    margin-top: 28px;
+    padding: 14px 18px;
+    background-color: var(--warna-aksen-pink-muda);
+    border: 2px dashed #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.register-banner-title {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--warna-teks);
+}
+
+.register-banner-desc {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    color: var(--warna-teks-redup);
+    margin: 2px 0 0 0;
+}
+
+.btn-register {
+    background-color: var(--warna-aksen-pink);
+    color: var(--warna-teks);
+    border: var(--border-tipis);
+    box-shadow: var(--bayangan-sm);
+    padding: 6px 14px;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.15s, color 0.15s, transform 0.1s;
+}
+
+.btn-register:hover {
+    background-color: var(--warna-aksen-pink-hover);
+    color: #ffffff;
+}
+
+.btn-register:active {
+    transform: translate(1px, 1px);
+    box-shadow: 0 0 0 #000000;
+}
+
+.card-micro-footer {
+    margin-top: 16px;
+    padding-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--warna-outline);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Pita Disclaimer Bawah (Partial auth-footer)
+   ========================================================================== */
+
+.baggage-tape {
+    margin-top: 16px;
+    padding: 8px 12px;
+    background-color: var(--warna-tape);
+    border: var(--border-sedang);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    color: var(--warna-teks);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.tape-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tape-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--warna-utama);
+    border: 1px solid #000000;
+    display: inline-block;
+}
+
+.tape-links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-judul);
+}
+
+.tape-link {
+    color: var(--warna-teks);
+    text-decoration: none;
+}
+
+.tape-link:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Responsivitas (Media Queries)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+    .auth-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+    .auth-poster {
+        display: none;
+    }
+    .auth-card {
+        padding: 24px 20px;
+        min-height: auto;
+    }
+    .auth-wrapper {
+        padding: 20px 12px;
+    }
+    .baggage-tape {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-grid {
+        grid-template-columns: 1fr;
+    }
+    .register-banner {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    .btn-register {
+        width: 100%;
+    }
+    .form-remember-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}

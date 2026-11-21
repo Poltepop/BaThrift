@@ -1,7 +1,7 @@
-<?php
+<?php 
 
-function index(): void{
-    Render('Admin/user', [
-        'title' => 'user'
+function index(){
+    Render('pembeli/profil-saya', [
+        'title' => 'Profil Saya - Bathrift',
     ]);
 }

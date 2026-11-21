@@ -8,21 +8,13 @@ require_once __DIR__ . '/app/Core/Middleware.php';
 require_once __DIR__ . '/app/Core/Router.php';
 
 // Auth Route
-add('GET', '/login', 'AuthController', 'login');
-add('POST', '/auth', 'AuthController', 'auth');
-add('GET', '/register', 'AuthController', 'register');
-add('POST', '/storeRegister', 'AuthController', 'storeRegister');
-add('GET', '/logout', 'AuthController', 'logout');
+add('GET', '/auth/login', 'AuthController', 'login');
+add('POST', '/auth/authenticate', 'AuthController', 'auth');
+add('GET', '/auth/register', 'AuthController', 'register');
+add('POST', '/auth/storeRegister', 'AuthController', 'storeRegister');
+add('GET', '/auth/logout', 'AuthController', 'logout');
 
-// User Route
-add('GET', '/', 'HomeController', 'index', ['auth']);
-
-// Admin Route
-add('GET', '/dashboard', 'dashboardController', 'index', ['admin']);
-add('GET', '/dashboard/kategori', 'CategoryController', 'index' , ['admin']);
-add('GET', '/dashboard/pengguna', 'UserController', 'index' , ['admin']);
-add('GET', '/dashboard/barang', 'ProductController', 'index', ['admin']);
-add('GET', '/dashboard/pesanan', 'OrderController', 'index', ['admin']);
-
+add('GET', '/', 'KatalogController', 'index', ['auth']);
+add('GET', '/profil', 'UserController', 'index', ['auth']);
 
 run();

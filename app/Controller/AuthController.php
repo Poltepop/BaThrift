@@ -6,42 +6,51 @@ require_once __DIR__ . "/../Core/Validator.php";
 
 function login(): void{
     $errors = $_SESSION['errors'] ?? [];
+    $old = $_SESSION['old'] ?? [];
     unset($_SESSION['errors']);
 
-    Render("Auth/login", [
-        'title' => 'login',
-        'errors' => $errors
+    Render("auth/login", [
+        'title' => 'Masuk - BaThrift',
+        'errors' => $errors,
+        'old' => $old
     ]);
 }
 
 function auth(): void{
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $email = trim($_POST['email']);
-        $pass = $_POST['password'];
-        $user = userAuthenticate($email, $pass);
+        $data = [
+            'email' =>  trim($_POST['email']),
+            'password' =>  $_POST['password']
+        ];
+
+        $user = userAuthenticate($data['email'], $data['password']);
 
         $errors = array_filter([
-            'email' => validate($email, required(), min_length(3), max_length(100), email_format()),
-            'password' => validate($pass, required())
+            'email' => validate($data['email'], required(), min_length(3), max_length(100), email_format()),
+            'password' => validate($data['password'], required())
         ]);
-        
+
+        if(is_null($user)){
+            $errors['error_login'] = 'Email Atau Password Salah';
+            $_SESSION['errors'] = $errors;
+            $_SESSION['old'] = $data;
+            redirect('/auth/login');
+            exit();
+        }
+    
         $_SESSION['errors'] = $errors;
 
         if($user['role'] !== 'admin'){
             $_SESSION['user'] = $user;
             redirect('/');
-            return;
+            exit();
         }
         
         if($user['role'] === 'admin'){
             $_SESSION['user'] = $user;
             redirect('/dashboard');
-            return;
+            exit();
         }
-        
-        $errors['error_login'] = 'Email Atau Password Salah';
-        $_SESSION['errors'] = $errors;
-        redirect('/login');
     }
 }
 
@@ -49,8 +58,8 @@ function register(): void{
     $errors = $_SESSION['errors'] ?? [];
     unset($_SESSION['errors']);
 
-    Render('Auth/register', [
-        'title' => 'register',
+    Render('auth/register', [
+        'title' => 'Daftar - BaThrift',
         'errors' => $errors
     ]);
 }
@@ -77,12 +86,12 @@ function storeRegister(): void{
 
         if(!empty($errors)){
             $_SESSION['errors'] = $errors;
-           redirect('/register');
+           redirect('/auth/register');
            exit(); 
         }
         
         storeDataUser($nl, $email, $phone, $pass);
-        redirect('/login');
+        redirect('/auth/login');
         return;
     }
 }
@@ -91,5 +100,5 @@ function logout(): void{
     session_unset();
     session_destroy();
     setcookie(session_name(), '', time() - 3600, '/');
-    redirect('/login');
+    redirect('/auth/login');
 }
