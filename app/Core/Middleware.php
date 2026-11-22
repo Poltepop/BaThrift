@@ -1,7 +1,7 @@
 <?php
 function middlewareAuth(): void {
     if (empty($_SESSION['user'])) {
-        redirect('/auth/login');
+        redirect('/login');
     }
 }
 
