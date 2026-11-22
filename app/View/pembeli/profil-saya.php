@@ -189,7 +189,7 @@ $toko = [
                         </a>
 
                         <!-- Tombol Keluar Akun -->
-                        <button type="button" class="btn-sidebar-logout" id="btn-sidebar-logout" href="<?= url('/auth/logout') ?>">
+                        <button type="button" class="btn-sidebar-logout" id="btn-sidebar-logout">
                             <span class="material-symbols-outlined">logout</span>
                             <span>KELUAR DARI AKUN</span>
                         </button>
@@ -523,7 +523,7 @@ $toko = [
                     <button type="button" class="btn-logout-cancel" id="btn-cancel-logout">
                         BATAL
                     </button>
-                    <a class="btn-logout-confirm" id="btn-confirm-logout" href="<?= url('/auth/login') ?>">
+                    <a class="btn-logout-confirm" id="btn-confirm-logout" href="<?= url('/logout') ?>">
                         <span class="material-symbols-outlined">check</span>
                         <span>YA, KELUAR</span>
                     </a>

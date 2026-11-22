@@ -62,7 +62,7 @@
             </div>
 
             <!-- Form Pendaftaran -->
-            <form class="form-register" action="<?= url('/auth/storeRegister') ?>" method="post">
+            <form class="form-register" action="<?= url('/storeRegister') ?>" method="post">
                 <!-- Field 1: Nama Lengkap -->
                 <!-- DATA: old_nama_lengkap -->
                 <?php
@@ -199,7 +199,7 @@
                     <span class="material-symbols-outlined">login</span>
                     <span>Sudah punya akun BaThrift?</span>
                 </div>
-                <a class="btn-login-redirect" href="<?= url('/auth/login') ?>">
+                <a class="btn-login-redirect" href="<?= url('/login') ?>">
                     MASUK DI SINI
                 </a>
             </div>

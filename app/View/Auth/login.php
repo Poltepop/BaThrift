@@ -148,7 +148,7 @@
                     <?php endif; ?>
 
                     <!-- Form Kredensial Autentikasi -->
-                    <form class="form-auth" id="loginForm" action="<?= url('/auth/authenticate') ?>" method="post">
+                    <form class="form-auth" id="loginForm" action="<?= url('/authenticate') ?>" method="post">
                         <!-- Input 1: Email / No. WhatsApp -->
                         <div class="form-group">
                             <label class="form-label" for="email">
@@ -232,7 +232,7 @@
                             <p class="register-banner-desc">Daftar gratis langsung dapat kupon ongkir 10K</p>
                         </div>
                         <!-- DATA: register_url -->
-                        <a class="btn-register" href="<?= url('/auth/register') ?>">
+                        <a class="btn-register" href="<?= url('/register') ?>">
                             DAFTAR SEKARANG
                         </a>
                     </div>

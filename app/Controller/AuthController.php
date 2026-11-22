@@ -34,7 +34,7 @@ function auth(): void{
             $errors['error_login'] = 'Email Atau Password Salah';
             $_SESSION['errors'] = $errors;
             $_SESSION['old'] = $data;
-            redirect('/auth/login');
+            redirect('/login');
             exit();
         }
     
@@ -86,12 +86,12 @@ function storeRegister(): void{
 
         if(!empty($errors)){
             $_SESSION['errors'] = $errors;
-           redirect('/auth/register');
+           redirect('/register');
            exit(); 
         }
         
         storeDataUser($nl, $email, $phone, $pass);
-        redirect('/auth/login');
+        redirect('/login');
         return;
     }
 }
@@ -100,5 +100,5 @@ function logout(): void{
     session_unset();
     session_destroy();
     setcookie(session_name(), '', time() - 3600, '/');
-    redirect('/auth/login');
+    redirect('/login');
 }
