@@ -2,7 +2,6 @@
 
 require_once __DIR__ . "/../Core/View.php";
 require_once __DIR__ . "/../Model/User.php";
-require_once __DIR__ . "/../Core/Validator.php";
 
 function login(): void{
     $errors = $_SESSION['errors'] ?? [];

@@ -1,45 +1,14 @@
 <?php
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
-
-// Memuat fungsi url() dari Core Router jika belum tersedia
-if (!function_exists('url')) {
-    require_once __DIR__ . '/../../Core/Router.php';
-}
-
-// Memuat Komponen Reusable
+// Komponen
 require_once __DIR__ . '/../components/input.php';
 
 // DATA: Variabel kontrol halaman & navigasi
-$page_title = 'Profil Saya & Pengaturan Akun - BaThrift';
 $active_nav = 'akun';
 $cart_count = 3;
 
-// DATA: Informasi Pengguna (Profil Pembeli)
-$user = [
-    'id' => 7,
-    'nama_lengkap' => 'Dimas Ramadhan',
-    'username' => 'dimas_vintage',
-    'email' => 'dimas.ramadhan@email.com',
-    'no_whatsapp' => '+62 812-3456-7890',
-    'tanggal_lahir' => '1998-08-17',
-    'initials' => 'DR',
-    'avatar_url' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuAgXU-2WRUfQVn6nCC9X6ezrDTAi5Ilk6cJ9K9_nEMCIUhKy9psMnSVAHcV8Uv-Us1xStqeBDsFUqvcyNouoUfxotX_-jiWt1MrrsloOhZ5hiTeVqTZDtfkvooP4iYFwEPxAs7Rqrh-sIc1qYB6Bk_fGviS2MLQDXTDyy_0eOlFSWuGo9NhB2_Z8UWucjnq_VPUdfc4sNPu5GwujCv-1Wg_A0ESClWvuO6VZQAdOkU',
-    'member_since' => '2023',
-    'tier' => 'POWER THRIFTER • TIER GOLD',
-    'tier_desc' => 'Fee rekber hemat 1% untuk semua transaksi',
-    'bio' => 'Hunting vintage garments sejak 2018. Kolektor Carhartt Detroit J97 & 90s band tees fade natural. Let’s talk vintage!',
-    'rekber_balance' => 1450000,
-    'rekber_balance_formatted' => 'Rp 1.450.000',
-    'kyc_status' => 'REKBER AKTIF • KYC APPROVED'
-];
-
 // DATA: Informasi Toko / Penjual Pengguna
 $toko = [
-    'id' => 12,
-    'nama_toko' => 'ARCHIVEJAKARTA',
-    'slug' => 'archivejakarta',
-    'status' => 'AKTIF (SELLER LEVEL 2)',
-    'deskripsi' => 'Spesialis kurasi outerwear vintage, Carhartt workwear era 90-an, Stüssy archive, & Japanese denim. Semua barang 100% original thrift luar negeri, sudah deep-cleaned & steamed steril. Nego tipis via chat dipersilakan!',
     'kota_pengiriman' => 'Kebayoran Baru, Jakarta Selatan (DKI Jakarta)',
     'stats' => [
         ['label' => 'Barang Terjual', 'value' => '148', 'icon' => ''],
@@ -49,8 +18,10 @@ $toko = [
     ]
 ];
 ?>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="id" xml:lang="id">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -66,9 +37,11 @@ $toko = [
     <link rel="stylesheet" href="<?= url('/assets/css/katalog.css') ?>" />
     <link rel="stylesheet" href="<?= url('/assets/css/profil.css') ?>" />
 </head>
+
 <body>
     <!-- Komponen Header BaThrift (Reusable) -->
     <?php require __DIR__ . '/../components/header.php'; ?>
+
 
     <!-- Konten Utama Profil Saya -->
     <main class="profil-main">
@@ -92,7 +65,7 @@ $toko = [
                     </div>
                     <div class="badge-kyc-status">
                         <span class="kyc-pulse-dot"></span>
-                        <span class="kyc-text"><?= htmlspecialchars($user['kyc_status'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></span>
+                        <span class="kyc-text"><?= htmlspecialchars($model['user']['status'] ?? '') ?></span>
                     </div>
                 </div>
             </div>
@@ -108,28 +81,30 @@ $toko = [
                         <div class="passport-user-row">
                             <div class="passport-avatar-box">
                                 <div class="passport-avatar-initials">
-                                    <span><?= htmlspecialchars($user['initials'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></span>
+                                    <span><?= htmlspecialchars(getInitials($model['user']['name'] ?? '')) ?></span>
                                 </div>
                                 <span class="passport-pro-tag">PRO</span>
                             </div>
                             <div class="passport-user-info">
-                                <h2 class="passport-user-name"><?= htmlspecialchars($user['nama_lengkap'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></h2>
-                                <p class="passport-user-handle">@<?= htmlspecialchars($user['username'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></p>
-                                <span class="passport-since-tag">MEMBER SEJAK <?= htmlspecialchars($user['member_since'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></span>
+                                <h2 class="passport-user-name"><?= htmlspecialchars($model['user']['name'] ?? '') ?></h2>
+                                <p class="passport-user-handle">@<?= htmlspecialchars($model['user']['username'] ?? 'username8872') ?></p>
+                                <span class="passport-since-tag">MEMBER SEJAK <?= htmlspecialchars(date('Y', strtotime($model['user']['created_at'] ?? ''))) ?></span>
                             </div>
                         </div>
 
                         <!-- Dompet Rekber Box -->
-                        <div class="rekber-wallet-box">
+                        <?php if(!empty($model['store'])):  ?>
+                            <div class="rekber-wallet-box">
                             <div class="rekber-wallet-header">
                                 <span>Saldo Dompet Rekber</span>
                                 <span class="material-symbols-outlined">lock</span>
                             </div>
                             <div class="rekber-wallet-balance-row">
-                                <span class="rekber-balance-amount"><?= htmlspecialchars($user['rekber_balance_formatted'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></span>
+                                <span class="rekber-balance-amount"><?= htmlspecialchars(formatRupiah($model['saldo'])) ?></span>
                                 <span class="rekber-status-badge">Tersedia</span>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Navigation Menu -->
@@ -209,7 +184,8 @@ $toko = [
 
                 <!-- MAIN FORM COLUMN -->
                 <main class="profil-main-col">
-                    <form id="profile-form" action="" method="post">
+                    <form id="profile-form" action="<?= url('/update-user') ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" value="<?= $model['user']['id'] ?? '' ?>" name="id">
                         <!-- SECTION 1: DATA PROFIL -->
                         <section class="content-card-box">
                             <div class="card-header-bar">
@@ -227,7 +203,16 @@ $toko = [
                             <div class="avatar-upload-row">
                                 <div class="avatar-preview-container">
                                     <div class="avatar-preview-box">
-                                        <img id="avatar-preview-img" class="avatar-preview-img" src="<?= htmlspecialchars($user['avatar_url'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?>" alt="Foto Profil" />
+                                        <img id="avatar-preview-img"
+                                             class="avatar-preview-img"
+                                             src="<?= !empty($model['user']['photo']) ? htmlspecialchars(url('/assets/img/profile/' . $model['user']['photo']), ENT_QUOTES | ENT_XML1, 'UTF-8') : '' ?>"
+                                             alt="Foto Profil"
+                                             <?= empty($model['user']['photo']) ? 'style="display:none;"' : '' ?> />
+                                        <div id="avatar-preview-initials"
+                                             class="avatar-preview-initials"
+                                             <?= !empty($model['user']['photo']) ? 'style="display:none;"' : '' ?>>
+                                            <span><?= htmlspecialchars(getInitials($model['user']['name'] ?? ''), ENT_QUOTES | ENT_XML1, 'UTF-8') ?></span>
+                                        </div>
                                     </div>
                                     <span class="avatar-real-sticker">AVATAR ASLI</span>
                                 </div>
@@ -241,13 +226,19 @@ $toko = [
                                         <label class="btn-avatar-upload" for="avatar-file-input">
                                             <span class="material-symbols-outlined">upload</span>
                                             <span>GANTI FOTO</span>
-                                            <input id="avatar-file-input" class="hidden-file-input" style="display:none;" type="file" accept="image/png, image/jpeg" />
+                                            <input id="avatar-file-input" class="hidden-file-input" style="display:none;" type="file" accept="image/png, image/jpeg" name="profile"/>
                                         </label>
                                         <button type="button" class="btn-avatar-delete" id="btn-delete-avatar">
                                             <span class="material-symbols-outlined">delete</span>
                                             <span>Hapus</span>
                                         </button>
                                     </div>
+                                    <?php if (!empty($model['errors']['file_upload'])): ?>
+                                        <div class="input-error-box">
+                                            <span class="material-symbols-outlined icon-fill">error</span>
+                                            <span class="error-text"><?= htmlspecialchars($model['errors']['file_upload'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></span>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
@@ -261,10 +252,11 @@ $toko = [
                                     'id' => 'prof-nama-lengkap',
                                     'class' => 'profil-editable',
                                     'placeholder' => 'Nama lengkap sesuai KTP',
-                                    'value' => $user['nama_lengkap'],
+                                    'value' => $model['user']['name'] ?? '',
                                     'required' => true,
                                     'readonly' => true,
-                                    'hint' => 'Sesuai nama rekening bank penarikan dana rekber'
+                                    'hint' => 'Sesuai nama rekening bank penarikan dana rekber',
+                                    'error' => $model['errors']['name'] ?? ''
                                 ]);
                                 ?>
 
@@ -276,12 +268,13 @@ $toko = [
                                     'id' => 'prof-username',
                                     'class' => 'profil-editable',
                                     'placeholder' => 'Username BaThrift',
-                                    'value' => $user['username'],
+                                    'value' => $model['user']['username'] ?? '',
                                     'prefix' => '@',
-                                    'required' => true,
+                                    'required' => false,
                                     'readonly' => true,
-                                    'badge' => 'URL: bathrift.id/' . $user['username'],
-                                    'badge_type' => 'valid'
+                                    'badge' => 'URL: bathrift.id/' . 'test',
+                                    'badge_type' => 'valid',
+                                    'error' => $model['errors']['username'] ?? ''
                                 ]);
                                 ?>
 
@@ -294,59 +287,33 @@ $toko = [
                                     'id' => 'prof-email',
                                     'class' => 'profil-editable',
                                     'placeholder' => 'alamat.email@domain.com',
-                                    'value' => $user['email'],
+                                    'value' => $model['user']['email'] ?? '',
                                     'required' => true,
                                     'readonly' => true,
                                     'badge' => 'TERVERIFIKASI',
                                     'badge_type' => 'valid',
-                                    'hint' => 'Digunakan untuk nota digital invoice &amp; reset kata sandi'
+                                    'hint' => 'Digunakan untuk nota digital invoice &amp; reset kata sandi',
+                                    'error' => $model['errors']['email'] ?? ''
                                 ]);
                                 ?>
 
                                 <!-- Input 4: No. WhatsApp -->
                                 <?php
                                 renderInput([
-                                    'name' => 'no_whatsapp',
+                                    'name' => 'phone',
                                     'label' => 'NO. WHATSAPP (AKTIF)',
-                                    'id' => 'prof-whatsapp',
+                                    'id' => 'phone',
                                     'class' => 'profil-editable',
                                     'placeholder' => '+62 8xx-xxxx-xxxx',
-                                    'value' => $user['no_whatsapp'],
+                                    'value' => $model['user']['phone'] ?? '',
                                     'required' => true,
                                     'readonly' => true,
                                     'badge' => 'TERHUBUNG WA',
                                     'badge_type' => 'valid',
-                                    'hint' => 'Notifikasi otomatis tawar-menawar &amp; resi pengiriman'
+                                    'hint' => 'Notifikasi otomatis tawar-menawar &amp; resi pengiriman',
+                                    'error' => $model['errors']['phone'] ?? ''
                                 ]);
                                 ?>
-
-                                <!-- Input 5: Tanggal Lahir -->
-                                <?php
-                                renderInput([
-                                    'name' => 'tanggal_lahir',
-                                    'type' => 'date',
-                                    'label' => 'TANGGAL LAHIR',
-                                    'id' => 'prof-tanggal-lahir',
-                                    'class' => 'profil-editable',
-                                    'value' => $user['tanggal_lahir'],
-                                    'required' => false,
-                                    'readonly' => true
-                                ]);
-                                ?>
-
-                                <!-- Status Tipe Keanggotaan -->
-                                <div class="form-group">
-                                    <div class="form-label-row">
-                                        <label class="form-label" for="prof-tier-display">TIPE KEANGGOTAAN</label>
-                                    </div>
-                                    <div class="tier-membership-box" id="prof-tier-display">
-                                        <span class="material-symbols-outlined tier-icon-star">workspace_premium</span>
-                                        <div>
-                                            <div class="tier-title"><?= htmlspecialchars($user['tier'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></div>
-                                            <div class="tier-desc"><?= htmlspecialchars($user['tier_desc'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
                             <!-- Bio Penggemar Thrift -->
@@ -354,7 +321,7 @@ $toko = [
                                 <div class="form-label-row">
                                     <label class="form-label" for="prof-bio">BIO PENGGEMAR THRIFT (PROFIL)</label>
                                 </div>
-                                <textarea id="prof-bio" class="form-textarea profil-editable" name="bio" rows="3" readonly="readonly"><?= htmlspecialchars($user['bio'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></textarea>
+                                <textarea id="prof-bio" class="form-textarea profil-editable" name="bio" rows="3" readonly="readonly" placeholder="Tambahkan keterangan untuk profile ini..."><?= htmlspecialchars($model['user']['bio'] ?? '') ?></textarea>
                             </div>
 
                             <!-- BUTTON TAMBAHAN: Edit Data Profil (User Request) -->
@@ -367,123 +334,13 @@ $toko = [
                             </div>
                         </section>
 
-                        <!-- SECTION 2: TOKO SAYA (SELLER PROFILE & CONFIG) -->
-                        <!-- DATA: toko -->
-                        <section class="content-card-box" style="margin-top: 28px;">
-                            <div class="card-header-bar">
-                                <div class="card-header-left">
-                                    <span class="card-section-number number-green">02. TOKO SAYA</span>
-                                    <span class="card-section-sub">PENGATURAN ETALASE LAPAK</span>
-                                </div>
-                                <div class="card-header-badge badge-yellow">
-                                    <span class="material-symbols-outlined">verified</span>
-                                    <span>STATUS LAPAK: <?= htmlspecialchars($toko['status'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></span>
-                                </div>
-                            </div>
-
-                            <!-- Public Alert Notice -->
-                            <div class="toko-notice-box">
-                                <span class="material-symbols-outlined">campaign</span>
-                                <p class="toko-notice-text">
-                                    <strong>CATATAN PUBLIK:</strong> Informasi identitas toko berikut ditampilkan secara terbuka di kartu barang, pencarian pasar loak, serta halaman etalase publik toko kamu.
-                                </p>
-                            </div>
-
-                            <!-- BUTTON TAMBAHAN: Toko Saya (User Request) -->
-                            <div class="toko-action-buttons-row">
-                                <a class="btn-manage-shop" id="btn-manage-shop" href="<?= url('/dashboard-toko') ?>">
-                                    <span class="material-symbols-outlined">storefront</span>
-                                    <span>KELOLA TOKO SAYA (DASHBOARD)</span>
-                                </a>
-                                <a class="btn-view-public-shop" id="btn-view-public-shop" href="<?= url('/profil-toko/' . $toko['id']) ?>">
-                                    <span class="material-symbols-outlined">visibility</span>
-                                    <span>LIHAT PROFIL TOKO PUBLIK</span>
-                                    <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
-                                </a>
-                            </div>
-
-                            <!-- Toko Form Fields Menggunakan Reusable renderInput() Component -->
-                            <div class="form-two-col-grid" style="margin-top: 20px;">
-                                <!-- Input Toko 1: Nama Toko -->
-                                <?php
-                                renderInput([
-                                    'name' => 'nama_toko',
-                                    'label' => 'NAMA LAPAK / TOKO',
-                                    'id' => 'prof-nama-toko',
-                                    'class' => 'profil-editable',
-                                    'placeholder' => 'Nama lapak thrifting kamu',
-                                    'value' => $toko['nama_toko'],
-                                    'required' => true,
-                                    'readonly' => true
-                                ]);
-                                ?>
-
-                                <!-- Input Toko 2: Slug Toko URL -->
-                                <?php
-                                renderInput([
-                                    'name' => 'slug_toko',
-                                    'label' => 'TAUTAN SLUG TOKO',
-                                    'id' => 'prof-slug-toko',
-                                    'class' => 'profil-editable',
-                                    'prefix' => 'bathrift.id/',
-                                    'placeholder' => 'slug-toko',
-                                    'value' => $toko['slug'],
-                                    'required' => true,
-                                    'readonly' => true
-                                ]);
-                                ?>
-                            </div>
-
-                            <!-- Deskripsi Toko -->
-                            <div class="form-group" style="margin-top: 16px;">
-                                <div class="form-label-row">
-                                    <label class="form-label" for="prof-toko-desc">DESKRIPSI TOKO &amp; SPESIALISASI CURATION</label>
-                                    <span class="label-hint">Maks. 300 Karakter</span>
-                                </div>
-                                <textarea id="prof-toko-desc" class="form-textarea profil-editable" name="deskripsi_toko" rows="4" readonly="readonly"><?= htmlspecialchars($toko['deskripsi'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></textarea>
-                            </div>
-
-                            <!-- Lokasi Gudang / Origin Pengiriman -->
-                            <div class="form-group" style="margin-top: 16px;">
-                                <div class="form-label-row">
-                                    <label class="form-label" for="prof-asal-kota">ASAL KOTA PENGIRIMAN (GUDANG LAPAK) <span class="text-required">*</span></label>
-                                </div>
-                                <div class="form-select-wrapper">
-                                    <select id="prof-asal-kota" class="form-select profil-editable" name="kota_pengiriman">
-                                        <option value="jaksel" selected="selected"><?= htmlspecialchars($toko['kota_pengiriman'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></option>
-                                        <option value="bandung">Bandung Wetan, Kota Bandung (Jawa Barat)</option>
-                                        <option value="surabaya">Tegalsari, Kota Surabaya (Jawa Timur)</option>
-                                        <option value="sleman">Kec. Sleman, D.I. Yogyakarta</option>
-                                    </select>
-                                    <span class="material-symbols-outlined select-arrow">expand_more</span>
-                                </div>
-                                <span class="label-hint">Penting: Penentu hitungan tarif ongkos kirim ekspedisi otomatis</span>
-                            </div>
-
-                            <!-- Bento Mini-Stats Toko -->
-                            <!-- LOOP: stats -->
-                            <div class="toko-stats-strip">
-                                <?php foreach ($toko['stats'] as $stat): ?>
-                                    <div class="stat-bento-card">
-                                        <div class="stat-bento-label"><?= htmlspecialchars($stat['label'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></div>
-                                        <div class="stat-bento-value">
-                                            <span><?= $stat['value'] ?></span>
-                                            <?php if ($stat['icon'] === 'star'): ?>
-                                                <span class="material-symbols-outlined stat-star-icon">star</span>
-                                            <?php endif; ?>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </section>
-
-                        <!-- STICKY ACTION FOOTER BAR -->
+                        <!-- STICKY ACTION FOOTER BAR: PROFIL -->
                         <div class="profil-save-footer-bar" style="margin-top: 28px;">
                             <div class="save-bar-info">
                                 <span class="material-symbols-outlined save-bar-icon">sync</span>
                                 <div>
-                                    <h4 class="save-bar-title">SINKRONISASI DATA AKUN</h4>
-                                    <p class="save-bar-desc">Pastikan nomor kontak WhatsApp &amp; alamat asal gudang lapak sudah tepat.</p>
+                                    <h4 class="save-bar-title">SIMPAN DATA PROFIL</h4>
+                                    <p class="save-bar-desc">Pastikan nama lengkap, email, dan nomor WhatsApp sudah tepat sebelum menyimpan.</p>
                                 </div>
                             </div>
                             <div class="save-bar-actions">
@@ -492,11 +349,129 @@ $toko = [
                                 </button>
                                 <button type="submit" class="btn-save-submit" id="save-profile-btn">
                                     <span class="material-symbols-outlined">save</span>
-                                    <span>SIMPAN PERUBAHAN</span>
+                                    <span>SIMPAN PROFIL</span>
                                 </button>
                             </div>
                         </div>
                     </form>
+
+                        <!-- SECTION 2: TOKO SAYA (SELLER PROFILE & CONFIG) -->
+                        <!-- DATA: toko -->
+                        <?php if(!empty($model['store'])): ?>
+                        <form id="form-toko" action="<?= url('/update-toko') ?>" method="post">
+                            <input type="hidden" name="store_id" value="<?= $model['store']['id'] ?>">
+                            <section class="content-card-box" style="margin-top: 28px;">
+                                <div class="card-header-bar">
+                                    <div class="card-header-left">
+                                        <span class="card-section-number number-green">02. TOKO SAYA</span>
+                                        <span class="card-section-sub">PENGATURAN ETALASE LAPAK</span>
+                                    </div>
+                                    <div class="card-header-badge badge-yellow">
+                                        <span class="material-symbols-outlined">verified</span>
+                                        <span>STATUS LAPAK: <?= htmlspecialchars($model['store']['status'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></span>
+                                    </div>
+                                </div>
+    
+                                <!-- Public Alert Notice -->
+                                <div class="toko-notice-box">
+                                    <span class="material-symbols-outlined">campaign</span>
+                                    <p class="toko-notice-text">
+                                        <strong>CATATAN PUBLIK:</strong> Informasi identitas toko berikut ditampilkan secara terbuka di kartu barang, pencarian pasar loak, serta halaman etalase publik toko kamu.
+                                    </p>
+                                </div>
+    
+                                <!-- BUTTON TAMBAHAN: Toko Saya (User Request) -->
+                                <div class="toko-action-buttons-row">
+                                    <a class="btn-manage-shop" id="btn-manage-shop" href="<?= url('/dashboard-toko') ?>">
+                                        <span class="material-symbols-outlined">storefront</span>
+                                        <span>KELOLA TOKO SAYA (DASHBOARD)</span>
+                                    </a>
+                                    <a class="btn-view-public-shop" id="btn-view-public-shop" href="<?= ' ' ?>">
+                                        <span class="material-symbols-outlined">visibility</span>
+                                        <span>LIHAT PROFIL TOKO PUBLIK</span>
+                                        <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>
+                                    </a>
+                                </div>
+    
+                                <!-- Toko Form Fields Menggunakan Reusable renderInput() Component -->
+                                <div class="form-two-col-grid" style="margin-top: 20px;">
+                                    <!-- Input Toko 1: Nama Toko -->
+                                    <?php
+                                    renderInput([
+                                        'name' => 'nama_toko',
+                                        'label' => 'NAMA LAPAK / TOKO',
+                                        'id' => 'prof-nama-toko',
+                                        'class' => 'profil-editable',
+                                        'placeholder' => 'Nama lapak thrifting kamu',
+                                        'value' => $model['store']['name'] ?? '',
+                                        'required' => true,
+                                        'readonly' => true
+                                    ]);
+                                    ?>
+    
+                                    <!-- Input Toko 2: Slug Toko URL -->
+                                    <?php
+                                    renderInput([
+                                        'name' => 'slug_toko',
+                                        'label' => 'TAUTAN SLUG TOKO',
+                                        'id' => 'prof-slug-toko',
+                                        'class' => 'profil-editable',
+                                        'prefix' => 'bathrift.id/',
+                                        'placeholder' => 'slug-toko',
+                                        'value' => $model['store']['slug'] ?? '',
+                                        'required' => true,
+                                        'readonly' => true
+                                    ]);
+                                    ?>
+                                </div>
+    
+                                <!-- Deskripsi Toko -->
+                                <div class="form-group" style="margin-top: 16px;">
+                                    <div class="form-label-row">
+                                        <label class="form-label" for="prof-toko-desc">DESKRIPSI TOKO &amp; SPESIALISASI CURATION</label>
+                                        <span class="label-hint">Maks. 300 Karakter</span>
+                                    </div>
+                                    <textarea id="prof-toko-desc" class="form-textarea profil-editable" name="deskripsi_toko" rows="4" readonly="readonly" placeholder="Masukan bio toko kamu..."><?= htmlspecialchars($model['store']['description'] ?? '') ?></textarea>
+                                </div>
+    
+                                <!-- Bento Mini-Stats Toko -->
+                                <!-- LOOP: stats -->
+                                <div class="toko-stats-strip">
+                                    <?php foreach ($toko['stats'] as $stat): ?>
+                                        <div class="stat-bento-card">
+                                            <div class="stat-bento-label"><?= htmlspecialchars($stat['label'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></div>
+                                            <div class="stat-bento-value">
+                                                <span><?= $stat['value'] ?></span>
+                                                <?php if ($stat['icon'] === 'star'): ?>
+                                                    <span class="material-symbols-outlined stat-star-icon">star</span>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                            </section>
+
+                            <!-- STICKY ACTION FOOTER BAR: TOKO -->
+                            <div class="profil-save-footer-bar" style="margin-top: 28px;">
+                                <div class="save-bar-info">
+                                    <span class="material-symbols-outlined save-bar-icon">sync</span>
+                                    <div>
+                                        <h4 class="save-bar-title">SIMPAN DATA TOKO</h4>
+                                        <p class="save-bar-desc">Pastikan nomor kontak WhatsApp &amp; alamat asal gudang lapak sudah tepat.</p>
+                                    </div>
+                                </div>
+                                <div class="save-bar-actions">
+                                    <button type="button" class="btn-save-cancel" id="btn-cancel-toko">
+                                        BATAL
+                                    </button>
+                                    <button type="submit" class="btn-save-submit" id="save-toko-btn">
+                                        <span class="material-symbols-outlined">save</span>
+                                        <span>SIMPAN DATA TOKO</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <?php endif; ?>
                 </main>
             </div>
         </div>
@@ -538,4 +513,5 @@ $toko = [
     <!-- JavaScript Interaktif DOM -->
     <script src="<?= url('/assets/js/profil.js') ?>"></script>
 </body>
+
 </html>

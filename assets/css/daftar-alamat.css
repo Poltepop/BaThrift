@@ -1,0 +1,1070 @@
+/* ==========================================================================
+   BaThrift - Daftar Alamat Pengiriman Stylesheet
+   Gaya: Neo-Brutalisme Murni (Native CSS, Tanpa Tailwind)
+   Menggunakan CSS variables dari profil.css
+   ========================================================================== */
+
+.alamat-wrapper {
+    gap: 24px;
+}
+
+/* ==========================================================================
+   TOP BREADCRUMB TICKER BAR
+   ========================================================================== */
+.alamat-ticker-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    border: var(--border-tipis);
+    background-color: var(--warna-kartu);
+    padding: 10px 14px;
+    box-shadow: var(--bayangan-md);
+}
+
+.alamat-ticker-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warna-teks);
+}
+
+.alamat-ticker-square {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: var(--warna-utama);
+    border: 1.5px solid var(--warna-border);
+}
+
+.alamat-ticker-muted {
+    color: var(--warna-teks-redup);
+}
+
+.alamat-ticker-bold {
+    font-weight: 800;
+}
+
+.alamat-ticker-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.alamat-courier-pill {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--warna-surface-highest);
+    padding: 3px 8px;
+    border: 1.5px solid var(--warna-border);
+    color: var(--warna-teks-redup);
+}
+
+.alamat-courier-pill .material-symbols-outlined {
+    font-size: 15px;
+    color: #005db8;
+}
+
+@media (min-width: 640px) {
+    .alamat-courier-pill {
+        display: inline-flex;
+    }
+}
+
+.alamat-status-pill {
+    background-color: var(--warna-utama);
+    padding: 3px 8px;
+    border: 1.5px solid var(--warna-border);
+    color: var(--warna-teks);
+}
+
+/* ==========================================================================
+   SIDEBAR EXTRA: TIPS ONGKIR CEPAT & BADGE DARK
+   ========================================================================== */
+.menu-badge-dark {
+    background-color: var(--warna-teks);
+    color: var(--warna-kartu);
+    border-color: var(--warna-teks);
+}
+
+.sidebar-tips-box {
+    background-color: var(--warna-aksen-biru);
+    border: var(--border-kartu);
+    padding: 16px;
+    box-shadow: var(--bayangan-lg);
+}
+
+.sidebar-tips-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-judul);
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #001b3e;
+}
+
+.sidebar-tips-title .material-symbols-outlined {
+    font-size: 22px;
+}
+
+.sidebar-tips-desc {
+    margin: 8px 0 0 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #001b3e;
+}
+
+/* ==========================================================================
+   RIGHT MAIN COLUMN: HEADER & ACTION BAR
+   ========================================================================== */
+.alamat-main-col {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+}
+
+.alamat-header-card {
+    background-color: var(--warna-kartu);
+    border: var(--border-kartu);
+    padding: 20px;
+    box-shadow: var(--bayangan-lg);
+}
+
+@media (min-width: 768px) {
+    .alamat-header-card {
+        padding: 24px;
+    }
+}
+
+.alamat-header-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    .alamat-header-top {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+}
+
+.alamat-hero-badge {
+    display: inline-block;
+    background-color: var(--warna-utama);
+    padding: 3px 8px;
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    box-shadow: var(--bayangan-sm);
+}
+
+.alamat-hero-title {
+    margin: 0;
+    font-family: var(--font-judul);
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--warna-teks);
+}
+
+@media (min-width: 768px) {
+    .alamat-hero-title {
+        font-size: 40px;
+    }
+}
+
+.alamat-hero-desc {
+    margin: 6px 0 0 0;
+    font-size: 15px;
+    color: var(--warna-teks-redup);
+    max-width: 580px;
+}
+
+.alamat-counter-tag {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--warna-surface-high);
+    border: var(--border-tipis);
+    padding: 6px 14px;
+    box-shadow: var(--bayangan-sm);
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    .alamat-counter-tag {
+        align-self: auto;
+    }
+}
+
+.alamat-counter-tag .material-symbols-outlined {
+    color: #705d00;
+    font-size: 20px;
+}
+
+/* Search & CTA Bar */
+.alamat-action-bar {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: var(--border-tipis);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+}
+
+@media (min-width: 640px) {
+    .alamat-action-bar {
+        flex-direction: row;
+    }
+}
+
+.alamat-search-box {
+    position: relative;
+    flex: 1;
+}
+
+.alamat-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--warna-teks-redup);
+    font-size: 20px;
+    pointer-events: none;
+}
+
+.alamat-search-input {
+    width: 100%;
+    height: 100%;
+    min-height: 44px;
+    background-color: var(--warna-kartu);
+    border: var(--border-tipis);
+    padding: 8px 14px 8px 40px;
+    font-family: var(--font-isi);
+    font-size: 15px;
+    color: var(--warna-teks);
+    transition: box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.alamat-search-input:focus {
+    outline: none;
+    background-color: #fffdf5;
+    box-shadow: var(--bayangan-sm);
+}
+
+.btn-tambah-alamat {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+    border: var(--border-kartu);
+    padding: 10px 22px;
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    box-shadow: var(--bayangan-lg);
+    white-space: nowrap;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.btn-tambah-alamat:hover {
+    background-color: var(--warna-utama-hover);
+    transform: translate(-1px, -1px);
+}
+
+.btn-tambah-alamat:active {
+    transform: translate(2px, 2px);
+    box-shadow: var(--bayangan-xs);
+}
+
+/* ==========================================================================
+   ADDRESS CARDS LIST
+   ========================================================================== */
+.alamat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.alamat-card {
+    background-color: var(--warna-kartu);
+    border: var(--border-kartu);
+    padding: 18px;
+    box-shadow: var(--bayangan-lg);
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.15s ease;
+}
+
+@media (min-width: 768px) {
+    .alamat-card {
+        padding: 24px;
+    }
+}
+
+.alamat-card:hover {
+    box-shadow: var(--bayangan-xl);
+}
+
+/* Corner Ribbon */
+.alamat-corner-ribbon-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 68px;
+    height: 68px;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.alamat-corner-ribbon {
+    background-color: var(--warna-utama);
+    border-bottom: var(--border-tipis);
+    border-left: var(--border-tipis);
+    position: absolute;
+    transform: rotate(45deg);
+    width: 96px;
+    top: 12px;
+    right: -28px;
+    text-align: center;
+    padding: 2px 0;
+    font-family: var(--font-judul);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+/* Badges */
+.alamat-badges-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.alamat-badges-row.has-ribbon {
+    padding-right: 48px;
+}
+
+.alamat-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warna-teks);
+}
+
+.alamat-badge .material-symbols-outlined {
+    font-size: 14px;
+}
+
+.alamat-badge-primary {
+    background-color: var(--warna-utama);
+    box-shadow: var(--bayangan-sm);
+}
+
+.alamat-badge-pink {
+    background-color: var(--warna-aksen-pink);
+    box-shadow: var(--bayangan-sm);
+}
+
+.alamat-badge-lime {
+    background-color: #a3e635;
+}
+
+.alamat-badge-neutral {
+    background-color: var(--warna-surface-container);
+}
+
+.alamat-badge-muted {
+    background-color: var(--warna-surface-highest);
+    color: var(--warna-teks-redup);
+}
+
+/* Card Header */
+.alamat-card-head {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 6px;
+    padding-bottom: 10px;
+    border-bottom: var(--border-tipis);
+}
+
+@media (min-width: 640px) {
+    .alamat-card-head {
+        flex-direction: row;
+        align-items: baseline;
+    }
+}
+
+.alamat-card-title-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.alamat-card-title {
+    margin: 0;
+    font-family: var(--font-judul);
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--warna-teks);
+}
+
+.alamat-card-recipient {
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--warna-teks-redup);
+}
+
+.alamat-card-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.alamat-card-phone {
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--warna-teks);
+}
+
+.alamat-wa-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: var(--warna-surface-container);
+    padding: 2px 6px;
+    border: 1.5px solid var(--warna-border);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.alamat-wa-tag .material-symbols-outlined {
+    font-size: 13px;
+    color: #005db8;
+}
+
+/* Card Body */
+.alamat-card-body {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+@media (min-width: 768px) {
+    .alamat-card-body {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.alamat-full-text {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--warna-teks);
+}
+
+.alamat-patokan-box {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: var(--warna-surface-container);
+    border: 1.5px solid var(--warna-border);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.alamat-patokan-box .material-symbols-outlined {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.patokan-icon-primary {
+    color: #705d00;
+}
+
+.patokan-icon-secondary {
+    color: var(--warna-aksen-pink-hover);
+}
+
+.alamat-patokan-text {
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--warna-teks);
+}
+
+/* Location Metadata Mini-Table */
+.alamat-meta-box {
+    background-color: #faf3e2;
+    border: var(--border-tipis);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.alamat-meta-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.alamat-meta-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.alamat-meta-key {
+    color: var(--warna-teks-redup);
+}
+
+.alamat-meta-val {
+    font-weight: 800;
+    color: var(--warna-teks);
+    text-align: right;
+}
+
+.meta-tone-tertiary {
+    color: #005db8;
+}
+
+.meta-tone-secondary {
+    color: var(--warna-aksen-pink-hover);
+}
+
+.alamat-geo-coords {
+    margin-top: 10px;
+    padding-top: 6px;
+    border-top: 1.5px solid var(--warna-border);
+    font-family: var(--font-judul);
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--warna-teks-redup);
+    letter-spacing: 0.04em;
+}
+
+/* Card Actions Row */
+.alamat-card-actions {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: var(--border-tipis);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.alamat-default-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    background-color: rgba(163, 230, 53, 0.35);
+    border: var(--border-tipis);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--warna-teks);
+}
+
+.alamat-default-pill .material-symbols-outlined {
+    font-size: 16px;
+}
+
+.alamat-origin-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--warna-teks-redup);
+}
+
+.alamat-origin-note .material-symbols-outlined {
+    font-size: 16px;
+    color: #005db8;
+}
+
+.btn-set-utama {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--warna-kartu);
+    color: var(--warna-teks);
+    border: var(--border-tipis);
+    padding: 5px 12px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    transition: background-color 0.12s ease, transform 0.12s ease;
+}
+
+.btn-set-utama:hover {
+    background-color: var(--warna-utama);
+}
+
+.btn-set-utama:active {
+    transform: translate(1px, 1px);
+}
+
+.btn-set-utama .material-symbols-outlined {
+    font-size: 16px;
+}
+
+.alamat-action-btns {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-ubah-alamat,
+.btn-hapus-alamat {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: var(--warna-kartu);
+    border: var(--border-tipis);
+    padding: 5px 12px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-sm);
+    transition: background-color 0.12s ease, transform 0.12s ease;
+}
+
+.btn-ubah-alamat {
+    color: var(--warna-teks);
+}
+
+.btn-ubah-alamat:hover {
+    background-color: var(--warna-surface-container);
+}
+
+.btn-hapus-alamat {
+    color: var(--warna-error);
+}
+
+.btn-hapus-alamat:hover {
+    background-color: var(--warna-error-bg);
+}
+
+.btn-ubah-alamat .material-symbols-outlined,
+.btn-hapus-alamat .material-symbols-outlined {
+    font-size: 16px;
+}
+
+.btn-locked-utama {
+    background-color: var(--warna-surface-high);
+    color: var(--warna-teks-redup);
+    border: 2px dashed var(--warna-outline);
+    padding: 5px 12px;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: not-allowed;
+    opacity: 0.78;
+}
+
+/* Empty State */
+.alamat-empty-state {
+    background-color: var(--warna-kartu);
+    border: var(--border-kartu);
+    padding: 36px 20px;
+    text-align: center;
+    box-shadow: var(--bayangan-lg);
+}
+
+.alamat-empty-state .material-symbols-outlined {
+    font-size: 42px;
+    color: var(--warna-teks-redup);
+}
+
+.alamat-empty-state p {
+    margin: 8px 0 0 0;
+    font-family: var(--font-judul);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   COURIER SYNC FOOTER STRIP
+   ========================================================================== */
+.courier-sync-strip {
+    background-color: var(--warna-surface-container);
+    border: var(--border-kartu);
+    padding: 16px;
+    box-shadow: var(--bayangan-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+@media (min-width: 640px) {
+    .courier-sync-strip {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.courier-sync-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.courier-sync-icon {
+    font-size: 32px;
+    color: var(--warna-teks);
+}
+
+.courier-sync-title {
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--warna-teks);
+}
+
+.courier-sync-desc {
+    font-size: 13px;
+    color: var(--warna-teks-redup);
+}
+
+.courier-sync-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.courier-tag {
+    padding: 4px 8px;
+    background-color: var(--warna-kartu);
+    border: 1.5px solid var(--warna-border);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+}
+
+/* ==========================================================================
+   NEO-BRUTALIST MODAL: TAMBAH / UBAH ALAMAT
+   ========================================================================== */
+.alamat-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    overflow-y: auto;
+    background-color: rgba(30, 28, 18, 0.72);
+    backdrop-filter: blur(3px);
+}
+
+.alamat-modal-overlay.is-hidden,
+.is-hidden {
+    display: none;
+}
+
+.alamat-modal-card {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    background-color: var(--warna-kartu);
+    border: var(--border-tebal);
+    box-shadow: var(--bayangan-2xl);
+    margin: auto;
+}
+
+.alamat-modal-top-strip {
+    height: 8px;
+    background-color: var(--warna-utama);
+    border-bottom: var(--border-tipis);
+    width: 100%;
+}
+
+.alamat-modal-header {
+    padding: 18px 20px;
+    border-bottom: var(--border-kartu);
+    background-color: var(--warna-latar);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.alamat-modal-badge {
+    display: inline-block;
+    background-color: var(--warna-utama);
+    padding: 2px 8px;
+    border: 1.5px solid var(--warna-border);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.alamat-modal-title {
+    margin: 0;
+    font-family: var(--font-judul);
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--warna-teks);
+}
+
+.alamat-modal-subtitle {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+    color: var(--warna-teks-redup);
+}
+
+.btn-modal-close {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: var(--warna-kartu);
+    border: var(--border-tipis);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-judul);
+    font-size: 18px;
+    font-weight: 800;
+    box-shadow: var(--bayangan-sm);
+    transition: background-color 0.12s ease;
+}
+
+.btn-modal-close:hover {
+    background-color: var(--warna-aksen-pink);
+}
+
+.alamat-modal-form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+.label-hint-inline {
+    font-family: var(--font-isi);
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: none;
+    color: var(--warna-teks-redup);
+}
+
+.alamat-modal-form .form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    .alamat-modal-form .form-grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.alamat-phone-group {
+    display: flex;
+    align-items: stretch;
+    box-shadow: var(--bayangan-md);
+    background-color: var(--warna-kartu);
+    transition: box-shadow 0.15s ease;
+}
+
+.alamat-phone-group:focus-within {
+    box-shadow: var(--bayangan-lg);
+}
+
+.alamat-phone-prefix {
+    background-color: var(--warna-surface-high);
+    border: var(--border-kartu);
+    border-right: none;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--warna-teks);
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.alamat-phone-input {
+    flex: 1;
+    box-shadow: none;
+}
+
+.alamat-phone-input:focus {
+    box-shadow: none;
+}
+
+.alamat-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 768px) {
+    .alamat-grid-3 {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.alamat-mono-input {
+    font-family: monospace;
+    font-weight: 700;
+}
+
+.alamat-checkbox-box {
+    padding: 12px;
+    background-color: var(--warna-surface-container);
+    border: var(--border-tipis);
+}
+
+.alamat-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--warna-teks);
+}
+
+.alamat-checkbox-input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--warna-teks);
+    cursor: pointer;
+}
+
+.alamat-modal-footer {
+    padding-top: 16px;
+    border-top: var(--border-tipis);
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+@media (min-width: 640px) {
+    .alamat-modal-footer {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.btn-modal-cancel {
+    background-color: var(--warna-kartu);
+    color: var(--warna-teks);
+    border: var(--border-tipis);
+    padding: 10px 20px;
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-md);
+}
+
+.btn-modal-cancel:hover {
+    background-color: var(--warna-surface-container);
+}
+
+.btn-modal-save {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+    border: var(--border-kartu);
+    padding: 10px 24px;
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    box-shadow: var(--bayangan-lg);
+}
+
+.btn-modal-save:hover {
+    background-color: var(--warna-utama-hover);
+}
