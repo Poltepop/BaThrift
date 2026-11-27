@@ -12,7 +12,7 @@ function index(): void{
     $user = getUserById($_SESSION['user']['id']);
     $store = getStoreByUserId($user['id']);
     $addresses = getAddressUser($user['id']);
-    $balance = getUserBalance($store['id']);
+    $balance = $store ? getUserBalance((int) $store['id']) : ['saldo' => 0];
 
     $_SESSION['user'] = $user;
     $errors = $_SESSION['errors'] ?? [];
@@ -25,7 +25,7 @@ function index(): void{
         'user'   => $user,
         'store' => $store,
         'addresses' => $addresses,
-        'saldo' => $balance['saldo'],
+        'saldo' => $balance['saldo'] ?? 0,
         'errors' => $errors,
         'errors-toko' => $errors_toko
     ]);
