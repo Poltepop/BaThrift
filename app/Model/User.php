@@ -58,6 +58,17 @@ function updateUser(array $data = []): void {
     mysqli_stmt_execute($stmt);
 }
 
+function getUserByEmail(string $email): array{
+    global $conn;
+
+    $stmt = mysqli_prepare($conn, "SELECT * FROM " . USER_TABLE . " WHERE EMAIL = ?");
+    mysqli_stmt_bind_param($stmt, 's', $email);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+    return mysqli_fetch_assoc($result);
+}
+
 function userAuthenticate(string $email, string $password): array|null{
     global $conn;
 
@@ -85,10 +96,10 @@ function isEmailUnique(string $email): bool{
     return true;
 }
 
-function storeDataUser(string $nl, string $email, string $phone, string $pass): void{
+function storeDataUser(array $data = []): void{
     global $conn;
 
     $stmt = mysqli_prepare($conn, "INSERT INTO " . USER_TABLE . " (name, email, password, phone) VALUES (? , ?, ?, ?)");
-    mysqli_stmt_bind_param($stmt, 'ssss', $nl, $email, $pass, $phone);
+    mysqli_stmt_bind_param($stmt, 'ssss', $data['name'], $data['email'], $data['password'], $data['phone']);
     mysqli_stmt_execute($stmt);
 }
