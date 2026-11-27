@@ -1,0 +1,1270 @@
+/* ==========================================================================
+   BaThrift - Buka Toko (Become a Seller) Stylesheet
+   Gaya: Neo-Brutalisme Murni (Native CSS, Tanpa Tailwind)
+   ========================================================================== */
+
+:root {
+    --warna-aksen-biru-solid: #4d96ff;
+    --warna-aksen-hijau-solid: #6bcb77;
+    --warna-latar-rendah: #faf3e2;
+    --warna-input-focus: #fffde6;
+    --warna-aksen-biru-muda: #d6e3ff;
+}
+
+/* ==========================================================================
+   MAIN LAYOUT & BREADCRUMB
+   ========================================================================== */
+.buka-toko-main {
+    width: 100%;
+    padding-top: 105px;
+    padding-bottom: 80px;
+    background-color: var(--warna-latar);
+    min-height: calc(100vh - 80px);
+}
+
+@media (min-width: 768px) {
+    .buka-toko-main {
+        padding-bottom: 56px;
+    }
+}
+
+.buka-toko-wrapper {
+    max-width: 1320px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 20px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+@media (min-width: 1024px) {
+    .buka-toko-wrapper {
+        padding: 24px 40px 40px;
+    }
+}
+
+.breadcrumb-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.breadcrumb-link {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warna-teks-redup);
+    transition: color 0.15s;
+}
+
+.breadcrumb-link:hover {
+    color: var(--warna-teks);
+    text-decoration: underline;
+}
+
+.breadcrumb-sep {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--warna-outline);
+}
+
+.breadcrumb-current {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+    padding: 3px 8px;
+    border: 2px solid #000000;
+    box-shadow: 2px 2px 0px #000000;
+}
+
+/* ==========================================================================
+   MAIN 12-COLUMN SPLIT GRID
+   ========================================================================== */
+.buka-toko-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .buka-toko-grid {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .promo-column {
+        grid-column: span 5 / span 5;
+    }
+
+    .form-column {
+        grid-column: span 7 / span 7;
+    }
+}
+
+.promo-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ==========================================================================
+   LEFT SIDE: HERO PROMO CARD
+   ========================================================================== */
+.hero-promo-card {
+    position: relative;
+    background-color: var(--warna-latar-rendah);
+    border: 3px solid #000000;
+    box-shadow: 6px 6px 0px #000000;
+    padding: 24px;
+    overflow: hidden;
+}
+
+.hero-dot-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.15;
+    pointer-events: none;
+    background-image: radial-gradient(#000000 1.5px, transparent 1.5px);
+    background-size: 16px 16px;
+}
+
+.hero-eyebrow-row {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.hero-eyebrow-badge {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 4px 8px;
+}
+
+.hero-fire-icon {
+    color: var(--warna-aksen-pink-hover);
+    font-size: 24px;
+}
+
+.hero-headline-block {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 24px;
+}
+
+.hero-kicker {
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--warna-aksen-pink-hover);
+    margin: 0 0 6px;
+}
+
+.hero-title {
+    font-family: var(--font-judul);
+    font-size: 38px;
+    line-height: 1.05;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    color: var(--warna-teks);
+    margin: 0;
+}
+
+@media (min-width: 640px) {
+    .hero-title {
+        font-size: 48px;
+    }
+}
+
+.hero-title-highlight {
+    display: inline-block;
+    background-color: var(--warna-utama);
+    padding: 2px 10px;
+    border: 3px solid #000000;
+    margin-top: 6px;
+    transform: rotate(-1deg);
+    box-shadow: 4px 4px 0px #000000;
+}
+
+/* Sticker Badges */
+.sticker-group {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0 24px;
+}
+
+.sticker-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 2px solid #000000;
+    padding: 6px 12px;
+    box-shadow: 3px 3px 0px #000000;
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--warna-teks);
+    transition: transform 0.15s ease;
+}
+
+.sticker-badge:hover {
+    transform: rotate(0deg);
+}
+
+.sticker-yellow {
+    background-color: var(--warna-utama);
+    transform: rotate(-3deg);
+}
+
+.sticker-green {
+    background-color: var(--warna-aksen-hijau-solid);
+    transform: rotate(4deg);
+}
+
+.sticker-pink {
+    background-color: var(--warna-aksen-pink);
+    transform: rotate(-2deg);
+}
+
+.sticker-blue {
+    background-color: var(--warna-aksen-biru-solid);
+    color: #ffffff;
+    transform: rotate(3deg);
+}
+
+/* 3 Mini Feature Cards */
+.hero-mini-features {
+    position: relative;
+    z-index: 1;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 3px solid #000000;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.mini-feature-card {
+    background-color: var(--warna-kartu);
+    border: 2px solid #000000;
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 2px 2px 0px #000000;
+}
+
+.mini-feature-icon {
+    font-size: 28px;
+}
+
+.icon-blue {
+    color: #005db8;
+}
+
+.icon-pink {
+    color: var(--warna-aksen-pink-hover);
+}
+
+.icon-gold {
+    color: #705d00;
+}
+
+.mini-feature-label {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warna-teks);
+    margin-top: 4px;
+}
+
+/* ==========================================================================
+   LEFT SIDE: 3 QUICK BENEFITS & PROOF CARD
+   ========================================================================== */
+.benefits-card {
+    background-color: var(--warna-kartu);
+    border: 3px solid #000000;
+    box-shadow: 6px 6px 0px #000000;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.benefits-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 10px;
+}
+
+.benefits-title {
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--warna-teks);
+    margin: 0;
+}
+
+.benefits-badge {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+    padding: 2px 8px;
+    border: 1px solid #000000;
+    flex-shrink: 0;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.benefit-number {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-judul);
+    font-size: 14px;
+    font-weight: 800;
+    flex-shrink: 0;
+    box-shadow: 2px 2px 0px #000000;
+}
+
+.benefit-num-yellow {
+    background-color: var(--warna-utama);
+    color: var(--warna-teks);
+}
+
+.benefit-num-pink {
+    background-color: var(--warna-aksen-pink);
+    color: var(--warna-teks);
+}
+
+.benefit-num-blue {
+    background-color: var(--warna-aksen-biru-solid);
+    color: #ffffff;
+}
+
+.benefit-item-title {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--warna-teks);
+    margin: 0 0 2px;
+}
+
+.benefit-item-desc {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--warna-teks-redup);
+    margin: 0;
+}
+
+.community-proof-card {
+    background-color: var(--warna-surface-container);
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.proof-icon-box {
+    width: 48px;
+    height: 48px;
+    background-color: var(--warna-utama);
+    border: 2px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 2px 2px 0px #000000;
+}
+
+.proof-icon {
+    font-size: 28px;
+    color: var(--warna-teks);
+}
+
+.proof-text-box {
+    flex: 1;
+    min-width: 0;
+}
+
+.proof-title {
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--warna-teks);
+    margin: 0 0 2px;
+}
+
+.proof-subtitle {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    color: var(--warna-teks-redup);
+    margin: 0;
+}
+
+/* ==========================================================================
+   RIGHT SIDE: FORM ACTIVATION CARD
+   ========================================================================== */
+.form-card {
+    background-color: var(--warna-kartu);
+    border: 3px solid #000000;
+    box-shadow: 6px 6px 0px #000000;
+}
+
+.form-card-topbar {
+    background-color: var(--warna-surface-high);
+    border-bottom: 3px solid #000000;
+    padding: 14px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.window-dot {
+    width: 12px;
+    height: 12px;
+    border: 1px solid #000000;
+    display: inline-block;
+}
+
+.dot-red {
+    background-color: var(--warna-error);
+}
+
+.dot-yellow {
+    background-color: var(--warna-utama);
+}
+
+.dot-green {
+    background-color: var(--warna-aksen-hijau-solid);
+}
+
+.topbar-title {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warna-teks);
+    margin-left: 6px;
+}
+
+.topbar-step-badge {
+    background-color: var(--warna-utama);
+    padding: 4px 12px;
+    border: 2px solid #000000;
+    box-shadow: 2px 2px 0px #000000;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warna-teks);
+}
+
+.form-card-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.form-intro {
+    border-bottom: 2px solid #000000;
+    padding-bottom: 12px;
+}
+
+.form-intro-title {
+    font-family: var(--font-judul);
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--warna-teks);
+    margin: 0;
+}
+
+.form-intro-desc {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    color: var(--warna-teks-redup);
+    margin: 6px 0 0;
+}
+
+/* ==========================================================================
+   FORM & REUSABLE INPUT COMPONENT STYLES
+   ========================================================================== */
+.store-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.field-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.form-label {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--warna-teks);
+}
+
+.text-required {
+    color: var(--warna-error);
+    font-weight: 800;
+}
+
+.label-hint {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--warna-outline);
+}
+
+.badge-error {
+    font-family: var(--font-judul);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--warna-error);
+    background-color: var(--warna-error-bg);
+    padding: 2px 6px;
+    border: 1px solid #000000;
+}
+
+.badge-status {
+    font-family: var(--font-judul);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border: 1px solid #000000;
+}
+
+.badge-preview {
+    background-color: var(--warna-surface-high);
+    color: var(--warna-teks);
+}
+
+.input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.input-wrapper.has-prefix {
+    display: flex;
+    align-items: stretch;
+    border: 3px solid #000000;
+    box-shadow: 2px 2px 0px #000000;
+    background-color: var(--warna-surface-high);
+}
+
+.input-prefix {
+    background-color: #e9e2d2;
+    border-right: 3px solid #000000;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--warna-teks-redup);
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.form-input {
+    width: 100%;
+    background-color: var(--warna-latar);
+    border: 3px solid #000000;
+    padding: 12px 16px;
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--warna-teks);
+    outline: none;
+    transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+.form-input::placeholder {
+    color: var(--warna-outline);
+    font-weight: 500;
+}
+
+.form-input:focus {
+    background-color: var(--warna-kartu);
+    box-shadow: 3px 3px 0px #000000;
+}
+
+.input-wrapper.has-prefix .form-input {
+    border: none;
+    box-shadow: none;
+    background-color: var(--warna-surface-container);
+    color: #705d00;
+    padding-right: 44px;
+    cursor: not-allowed;
+}
+
+.form-input.input-error {
+    background-color: #fff5f5;
+    border-color: var(--warna-error);
+    box-shadow: 3px 3px 0px var(--warna-error);
+}
+
+.input-status-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 2px;
+    border: 2px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-valid {
+    background-color: var(--warna-aksen-hijau-solid);
+    color: #000000;
+}
+
+.status-valid .material-symbols-outlined {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.input-error-box {
+    margin-top: 6px;
+    background-color: var(--warna-error-bg);
+    border: 2px solid var(--warna-error);
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--warna-error);
+}
+
+.field-helper-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--warna-teks-redup);
+    margin: 0;
+}
+
+.field-helper-icon {
+    font-size: 16px;
+    color: #005db8;
+    flex-shrink: 0;
+}
+
+.field-helper-plain {
+    font-size: 13px;
+    color: var(--warna-teks-redup);
+    margin: 0;
+}
+
+/* Category Radio Cards */
+.category-radio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+@media (min-width: 768px) {
+    .category-radio-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+.category-radio-label {
+    cursor: pointer;
+    display: block;
+}
+
+.category-radio-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+.category-radio-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 12px 8px;
+    border: 2px solid #000000;
+    background-color: var(--warna-latar);
+    text-align: center;
+    transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+.category-radio-box:hover {
+    background-color: var(--warna-surface-container);
+}
+
+.category-radio-input:checked + .category-radio-box {
+    background-color: var(--warna-utama);
+    border: 3px solid #000000;
+    box-shadow: 3px 3px 0px #000000;
+}
+
+.category-radio-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: var(--warna-teks);
+}
+
+.category-radio-text {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warna-teks);
+}
+
+/* Textarea */
+.form-textarea {
+    width: 100%;
+    background-color: var(--warna-latar);
+    border: 3px solid #000000;
+    padding: 12px 14px;
+    font-family: var(--font-isi);
+    font-size: 13px;
+    color: var(--warna-teks);
+    resize: none;
+    outline: none;
+    transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+.form-textarea::placeholder {
+    color: var(--warna-outline);
+}
+
+.form-textarea:focus {
+    background-color: var(--warna-kartu);
+    box-shadow: 3px 3px 0px #000000;
+}
+
+/* Select Dropdown */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.form-select {
+    width: 100%;
+    background-color: var(--warna-latar);
+    border: 3px solid #000000;
+    padding: 12px 48px 12px 16px;
+    font-family: var(--font-judul);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--warna-teks);
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.15s, box-shadow 0.15s;
+}
+
+.form-select:focus {
+    background-color: var(--warna-kartu);
+    box-shadow: 3px 3px 0px #000000;
+}
+
+.select-arrow-box {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    border-left: 3px solid #000000;
+    background-color: #e9e2d2;
+    pointer-events: none;
+}
+
+/* Terms Checkbox */
+.terms-row {
+    padding-top: 6px;
+}
+
+.terms-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.terms-checkbox-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+.terms-checkbox-box {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #000000;
+    background-color: var(--warna-kartu);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 2px 2px 0px #000000;
+    transition: background-color 0.15s;
+}
+
+.terms-check-icon {
+    font-size: 18px;
+    font-weight: 800;
+    color: #000000;
+    display: none;
+}
+
+.terms-checkbox-input:checked + .terms-checkbox-box {
+    background-color: var(--warna-utama);
+}
+
+.terms-checkbox-input:checked + .terms-checkbox-box .terms-check-icon {
+    display: inline-block;
+}
+
+.terms-text {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--warna-teks);
+    padding-top: 1px;
+}
+
+.terms-link {
+    font-weight: 700;
+    text-decoration: underline;
+    color: var(--warna-aksen-pink-hover);
+}
+
+.terms-link:hover {
+    color: #000000;
+}
+
+/* Submit CTA Button */
+.submit-row {
+    padding-top: 6px;
+}
+
+.btn-submit-toko {
+    width: 100%;
+    background-color: var(--warna-utama);
+    color: #000000;
+    border: 3px solid #000000;
+    padding: 16px 24px;
+    font-family: var(--font-judul);
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    box-shadow: 4px 4px 0px #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.15s, transform 0.1s, box-shadow 0.1s;
+}
+
+.btn-submit-toko:hover {
+    background-color: var(--warna-utama-muda);
+}
+
+.btn-submit-toko:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000000;
+}
+
+.btn-submit-toko.is-success {
+    background-color: var(--warna-aksen-hijau-solid);
+}
+
+.btn-submit-toko:disabled {
+    cursor: wait;
+    opacity: 0.9;
+}
+
+.btn-submit-icon {
+    font-size: 24px;
+}
+
+/* Crucial Note Box */
+.crucial-note-box {
+    background-color: rgba(255, 225, 115, 0.35);
+    border: 3px solid #000000;
+    padding: 16px;
+    box-shadow: 3px 3px 0px #000000;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.note-icon-box {
+    width: 28px;
+    height: 28px;
+    background-color: var(--warna-utama);
+    border: 2px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.note-icon-box .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--warna-teks);
+}
+
+.note-title {
+    font-family: var(--font-judul);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--warna-teks);
+    margin: 0 0 4px;
+}
+
+.note-desc {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--warna-teks-redup);
+    margin: 0;
+}
+
+.note-user-name {
+    color: var(--warna-teks);
+}
+
+/* Decorative Footer Strip */
+.form-card-footer-strip {
+    border-top: 3px solid #000000;
+    background-color: #e9e2d2;
+    padding: 10px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.strip-left {
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--warna-teks-redup);
+}
+
+.strip-right {
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--warna-teks);
+}
+
+/* ==========================================================================
+   3-STEP SELLING PROCESS BANNER
+   ========================================================================== */
+.steps-banner-card {
+    margin-top: 24px;
+    background-color: var(--warna-surface-high);
+    border: 4px solid #000000;
+    box-shadow: 6px 6px 0px #000000;
+    padding: 24px;
+}
+
+.steps-banner-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    border-bottom: 3px solid #000000;
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+    .steps-banner-header {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+}
+
+.steps-eyebrow-badge {
+    display: inline-block;
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background-color: var(--warna-aksen-pink-hover);
+    color: #ffffff;
+    padding: 3px 8px;
+    border: 1px solid #000000;
+}
+
+.steps-banner-title {
+    font-family: var(--font-judul);
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--warna-teks);
+    margin: 6px 0 0;
+}
+
+.steps-banner-subtitle {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    color: var(--warna-teks-redup);
+    max-width: 420px;
+    margin: 0;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 768px) {
+    .steps-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.step-card {
+    background-color: var(--warna-kartu);
+    border: 3px solid #000000;
+    padding: 18px;
+    box-shadow: 4px 4px 0px #000000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.step-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #000000;
+    font-family: var(--font-judul);
+    font-size: 20px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--warna-teks);
+    box-shadow: 2px 2px 0px #000000;
+}
+
+.step-num-yellow {
+    background-color: var(--warna-utama);
+}
+
+.step-num-pink {
+    background-color: var(--warna-aksen-pink);
+}
+
+.step-num-green {
+    background-color: var(--warna-aksen-hijau-solid);
+}
+
+.step-icon {
+    font-size: 32px;
+    color: var(--warna-teks);
+}
+
+.step-title {
+    font-family: var(--font-judul);
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--warna-teks);
+    margin: 0 0 6px;
+}
+
+.step-desc {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--warna-teks-redup);
+    margin: 0;
+}
+
+.step-meta {
+    margin-top: 16px;
+    padding-top: 10px;
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+    font-family: var(--font-judul);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--warna-teks-redup);
+}
+
+/* ==========================================================================
+   TOAST FEEDBACK BANNER
+   ========================================================================== */
+.toast-feedback-banner {
+    position: fixed;
+    bottom: 84px;
+    right: 20px;
+    z-index: 60;
+    max-width: 380px;
+}
+
+@media (min-width: 768px) {
+    .toast-feedback-banner {
+        bottom: 28px;
+        right: 28px;
+    }
+}
+
+.toast-feedback-banner.is-hidden {
+    display: none;
+}
+
+.toast-feedback-box {
+    background-color: var(--warna-utama);
+    border: 3px solid #000000;
+    padding: 16px;
+    box-shadow: 6px 6px 0px #000000;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.toast-feedback-box.is-error {
+    background-color: var(--warna-error-bg);
+}
+
+.toast-feedback-icon {
+    font-size: 28px;
+    color: #000000;
+    flex-shrink: 0;
+}
+
+.toast-feedback-title {
+    font-family: var(--font-judul);
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #000000;
+    margin: 0 0 2px;
+}
+
+.toast-feedback-message {
+    font-family: var(--font-isi);
+    font-size: 13px;
+    color: #000000;
+    margin: 0;
+}

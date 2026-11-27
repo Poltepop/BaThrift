@@ -14,6 +14,50 @@ function getAllUser(): array{
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
+function getUserById(int $id): array{
+    global $conn;
+    
+    $stmt = mysqli_prepare($conn, "SELECT * FROM " . USER_TABLE . " WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, 'i', $id);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+    return mysqli_fetch_assoc($result);
+}
+
+function updateUser(array $data = []): void {
+    global $conn;
+
+    $sql = "UPDATE " . USER_TABLE . " SET "
+         . "name = ?, "
+         . "username = ?, "
+         . "email = ?, "
+         . "phone = ?, "
+         . "bio = ?, "
+         . "photo = ? "
+         . "WHERE id = ?";
+
+    $stmt = mysqli_prepare($conn, $sql);
+
+    if ($stmt === false) {
+        return;
+    }
+
+    mysqli_stmt_bind_param(
+        $stmt,
+        'ssssssi',
+        $data['name'],
+        $data['username'],
+        $data['email'],
+        $data['phone'],
+        $data['bio'],
+        $data['photo'],
+        $data['id']
+    );
+
+    mysqli_stmt_execute($stmt);
+}
+
 function userAuthenticate(string $email, string $password): array|null{
     global $conn;
 
@@ -47,5 +91,4 @@ function storeDataUser(string $nl, string $email, string $phone, string $pass): 
     $stmt = mysqli_prepare($conn, "INSERT INTO " . USER_TABLE . " (name, email, password, phone) VALUES (? , ?, ?, ?)");
     mysqli_stmt_bind_param($stmt, 'ssss', $nl, $email, $pass, $phone);
     mysqli_stmt_execute($stmt);
-
 }

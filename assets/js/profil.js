@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (btnEditProfile) {
         btnEditProfile.addEventListener('click', function () {
             isEditMode = !isEditMode;
-            const editableInputs = document.querySelectorAll('.profil-editable');
+            var editableInputs = document.querySelectorAll('.profil-editable');
 
             if (isEditMode) {
                 editableInputs.forEach(function (input) {
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 btnEditProfile.innerHTML = '<span class="material-symbols-outlined">edit_note</span><span>MODE EDIT AKTIF</span>';
                 btnEditProfile.style.backgroundColor = 'var(--warna-aksen-pink)';
 
-                const firstInput = document.getElementById('prof-nama-lengkap');
+                var firstInput = document.getElementById('prof-nama-lengkap');
                 if (firstInput) {
                     firstInput.focus();
                 }
@@ -70,32 +70,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // 2. Simpan Perubahan Form
-    function handleSaveProfile() {
-        showToast('DATA PROFIL & LAPAK BERHASIL DIPERBARUI!');
-
-        // Kembalikan ke mode readonly bila sebelumnya edit mode aktif
-        if (isEditMode && btnEditProfile) {
-            isEditMode = false;
-            const editableInputs = document.querySelectorAll('.profil-editable');
-            editableInputs.forEach(function (input) {
-                input.setAttribute('readonly', 'readonly');
-            });
-            btnEditProfile.innerHTML = '<span class="material-symbols-outlined">edit</span><span>EDIT DATA PROFIL</span>';
-            btnEditProfile.style.backgroundColor = '';
-        }
-    }
-
-    if (btnSaveProfile) {
-        btnSaveProfile.addEventListener('click', function (e) {
-            e.preventDefault();
-            handleSaveProfile();
-        });
-    }
-
+    //    FIX: preventDefault dulu, hapus semua readonly, baru submit manual.
+    //    Tanpa ini, browser sudah snapshot nilai field SEBELUM readonly dilepas,
+    //    sehingga field readonly tidak ikut terkirim ke POST.
     if (formProfile) {
         formProfile.addEventListener('submit', function (e) {
             e.preventDefault();
-            handleSaveProfile();
+
+            var editableInputs = document.querySelectorAll('.profil-editable');
+            editableInputs.forEach(function (input) {
+                input.removeAttribute('readonly');
+                // <select> tidak mengenal atribut readonly secara native,
+                // pastikan disabled juga tidak terpasang
+                if (input.tagName.toLowerCase() === 'select') {
+                    input.removeAttribute('disabled');
+                }
+            });
+
+            // Submit programatik setelah semua readonly sudah dilepas
+            formProfile.submit();
         });
     }
 
@@ -107,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             if (isEditMode && btnEditProfile) {
                 isEditMode = false;
-                const editableInputs = document.querySelectorAll('.profil-editable');
+                var editableInputs = document.querySelectorAll('.profil-editable');
                 editableInputs.forEach(function (input) {
                     input.setAttribute('readonly', 'readonly');
                 });
@@ -119,17 +112,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // 4. Upload Foto Profil Baru
-    if (avatarFileInput && avatarPreviewImg) {
+    if (avatarFileInput) {
         avatarFileInput.addEventListener('change', function () {
-            const file = this.files && this.files[0];
+            var file = this.files && this.files[0];
             if (file) {
                 if (file.size > 2 * 1024 * 1024) {
                     showToast('Ukuran file maksimal 2MB!');
                     return;
                 }
-                const reader = new FileReader();
+                var reader = new FileReader();
                 reader.onload = function (e) {
-                    avatarPreviewImg.src = e.target.result;
+                    var img = document.getElementById('avatar-preview-img');
+                    var initialsBox = document.getElementById('avatar-preview-initials');
+
+                    if (initialsBox) {
+                        initialsBox.style.display = 'none';
+                    }
+                    if (img) {
+                        img.src = e.target.result;
+                        img.style.display = '';
+                    }
                     showToast('Foto profil baru siap disimpan!');
                 };
                 reader.readAsDataURL(file);
@@ -137,12 +139,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // 5. Hapus Foto Profil
-    if (btnDeleteAvatar && avatarPreviewImg) {
+    // 5. Hapus Foto Profil — kembalikan ke tampilan initials
+    if (btnDeleteAvatar) {
         btnDeleteAvatar.addEventListener('click', function () {
-            const confirmDelete = window.confirm('Kembalikan foto profil ke default inisial?');
+            var confirmDelete = window.confirm('Kembalikan foto profil ke default inisial?');
             if (confirmDelete) {
-                avatarPreviewImg.src = 'https://ui-avatars.com/api/?name=Dimas+Ramadhan&background=4ECCA3&color=1e1c12&size=200';
+                var img = document.getElementById('avatar-preview-img');
+                var initialsBox = document.getElementById('avatar-preview-initials');
+
+                if (img) {
+                    img.src = '';
+                    img.style.display = 'none';
+                }
+                if (initialsBox) {
+                    initialsBox.style.display = '';
+                }
                 if (avatarFileInput) {
                     avatarFileInput.value = '';
                 }
@@ -151,10 +162,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // 6. Tombol Keluar dari Akun (Logout Dialog / Toast Konfirmasi)
-    const logoutOverlay = document.getElementById('logout-confirm-overlay');
-    const btnCancelLogout = document.getElementById('btn-cancel-logout');
-    const btnConfirmLogout = document.getElementById('btn-confirm-logout');
+    // 6. Tombol Keluar dari Akun (Logout Dialog)
+    var logoutOverlay = document.getElementById('logout-confirm-overlay');
+    var btnCancelLogout = document.getElementById('btn-cancel-logout');
+    var btnConfirmLogout = document.getElementById('btn-confirm-logout');
 
     if (btnLogout && logoutOverlay) {
         btnLogout.addEventListener('click', function () {
