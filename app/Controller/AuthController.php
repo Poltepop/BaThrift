@@ -7,6 +7,7 @@ function login(): void{
     $errors = $_SESSION['errors'] ?? [];
     $old = $_SESSION['old'] ?? [];
     unset($_SESSION['errors']);
+    unset($_SESSION['old']);
 
     Render("auth/login", [
         'title' => 'Masuk - BaThrift',
@@ -22,22 +23,27 @@ function auth(): void{
             'password' =>  $_POST['password']
         ];
 
-        $user = userAuthenticate($data['email'], $data['password']);
+        $user = getUserByEmail($data['email']);
 
         $errors = array_filter([
             'email' => validate($data['email'], required(), min_length(3), max_length(100), email_format()),
             'password' => validate($data['password'], required())
         ]);
 
-        if(is_null($user)){
+        if(!($user['email'] && password_verify($data['password'], $user['password']))){
             $errors['error_login'] = 'Email Atau Password Salah';
-            $_SESSION['errors'] = $errors;
             $_SESSION['old'] = $data;
             redirect('/login');
             exit();
         }
     
-        $_SESSION['errors'] = $errors;
+
+        if(!empty($errors)){
+            $_SESSION['errors'] = $errors;
+            redirect('/login');
+            exit();    
+        }
+
 
         if($user['role'] !== 'admin'){
             $_SESSION['user'] = $user;
@@ -50,46 +56,55 @@ function auth(): void{
             redirect('/dashboard');
             exit();
         }
+
+
     }
 }
 
 function register(): void{
     $errors = $_SESSION['errors'] ?? [];
+    $old = $_SESSION['old'] ?? [];
     unset($_SESSION['errors']);
+    unset($_SESSION['old']);
 
     Render('auth/register', [
         'title' => 'Daftar - BaThrift',
-        'errors' => $errors
+        'errors' => $errors,
+        'old' => $old
     ]);
 }
 
 function storeRegister(): void{
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $nl = trim($_POST['nama_lengkap']);
-        $email = trim($_POST['email']);
-        $phone = trim($_POST['phone']);
-        $pass = $_POST['password'];
-        $pass_re = $_POST['password-re'];
+        $data = [
+            'name' => trim($_POST['nama_lengkap']),
+            'email' => trim($_POST['email']),
+            'phone' => trim($_POST['phone']),
+            'password' => $_POST['password'],
+            'password_re' => $_POST['password-re']
+        ];
 
         $errors = array_filter([
-            'nama_lengkap' => validate($nl, required(), max_length(100)),
-            'email' => validate($email, required(), min_length(3), max_length(100), email_format()),
-            'phone' => validate($phone, required(), max_length(20), phone_format()),
-            'password' => validate($pass, required(), min_length(8), max_length(255)),
-            'password-re' => validate($pass_re, required(), min_length(8), max_length(255), matches($pass, 'Kata Sandi Tidak Cocok! Pastikan sama persis dengan kolom sandi di atas'))
+            'nama_lengkap' => validate($data['name'], required(), max_length(100)),
+            'email' => validate($data['email'], required(), min_length(3), max_length(100), email_format()),
+            'phone' => validate($data['phone'], required(), max_length(20), phone_format()),
+            'password' => validate($data['password'], required(), min_length(8), max_length(255)),
+            'password-re' => validate($data['password_re'], required(), min_length(8), max_length(255), matches($data['password'], 'Kata Sandi Tidak Cocok! Pastikan sama persis dengan kolom sandi di atas'))
         ]);
 
-        if(!isEmailUnique($email)){
+        if(!isEmailUnique($data['email'])){
             $errors['email'] = "Email Sudah Digunakan!";
         }
 
         if(!empty($errors)){
             $_SESSION['errors'] = $errors;
-           redirect('/register');
-           exit(); 
+            $_SESSION['old'] = $data;
+            redirect('/register');
+            exit(); 
         }
         
-        storeDataUser($nl, $email, $phone, $pass);
+        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        storeDataUser($data);
         redirect('/login');
         return;
     }

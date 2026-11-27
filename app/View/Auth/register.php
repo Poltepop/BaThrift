@@ -74,7 +74,7 @@
                     'hint'        => 'Sesuai KTP/Rekening',
                     'icon'        => 'badge',
                     'required'    => false,
-                    'value'       => $old_nama_lengkap ?? '',
+                    'value'       => $model['old']['name'] ?? '',
                     'error'       => $model['errors']['nama_lengkap'] ?? ''
                 ]);
                 ?>
@@ -92,7 +92,7 @@
                     'badge_type'  => 'valid',
                     'icon'        => 'check',
                     'required'    => false,
-                    'value'       => $old_email ?? '',
+                    'value'       => $model['old']['email'] ?? '',
                     'error'       => $model['errors']['email'] ?? ''
                 ]);
                 ?>
@@ -108,7 +108,7 @@
                     'prefix'      => '+62',
                     'placeholder' => '812-xxxx-xxxx',
                     'required'    => false,
-                    'value'       => $old_phone ?? '',
+                    'value'       => $model['old']['phone'] ?? '',
                     'error'       => $model['errors']['phone'] ?? ''
                 ]);
                 ?>
@@ -124,7 +124,7 @@
                     'hint'        => 'Min. 8 karakter',
                     'required'    => false,
                     'is_password' => true,
-                    'value'       => $old_password ?? '',
+                    'value'       => $model['old']['password'] ?? '',
                     'error'       => $model['errors']['password'] ?? ''
                 ]);
                 ?>
@@ -139,7 +139,7 @@
                     'placeholder' => 'Ulangi kata sandi',
                     'required'    => false,
                     'is_password' => true,
-                    'value'       => $old_password_re ?? '',
+                    'value'       => $model['old']['password_re'] ?? '',
                     'error'       => $model['errors']['password-re'] ?? ''
                 ]);
                 ?>
