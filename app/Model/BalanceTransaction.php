@@ -10,5 +10,5 @@ function getUserBalance(int $storeId): array {
     mysqli_stmt_execute($stmt);
 
     $result = mysqli_stmt_get_result($stmt);
-    return mysqli_fetch_assoc($result);
+    return mysqli_fetch_assoc($result) ?: ['saldo' => 0];
 }

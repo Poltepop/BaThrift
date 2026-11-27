@@ -2,7 +2,7 @@
 
 define('STORE_TABLE', 'stores');
 
-function getStoreByUserId(int $userId): array{
+function getStoreByUserId(int $userId): ?array{
     global $conn;
     
     $stmt = mysqli_prepare($conn, "SELECT * FROM stores WHERE user_id = ?");
@@ -10,7 +10,7 @@ function getStoreByUserId(int $userId): array{
     mysqli_stmt_execute($stmt);
 
     $result = mysqli_stmt_get_result($stmt);
-    return mysqli_fetch_assoc($result);
+    return mysqli_fetch_assoc($result) ?: null;
 }
 
 function updateToko(array $data = []): void{
