@@ -19,45 +19,42 @@ function login(): void{
 function auth(): void{
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $data = [
-            'email' =>  trim($_POST['email']),
-            'password' =>  $_POST['password']
+            'email' => trim($_POST['email'] ?? ''),
+            'password' => $_POST['password'] ?? ''
         ];
-
-        $user = getUserByEmail($data['email']);
 
         $errors = array_filter([
             'email' => validate($data['email'], required(), min_length(3), max_length(100), email_format()),
             'password' => validate($data['password'], required())
         ]);
 
-        if(!($user['email'] && password_verify($data['password'], $user['password']))){
-            $errors['error_login'] = 'Email Atau Password Salah';
-            $_SESSION['old'] = $data;
+        if(!empty($errors)){
+            $_SESSION['errors'] = $errors;
+            $_SESSION['old'] = ['email' => $data['email']];
             redirect('/login');
             exit();
         }
-    
 
-        if(!empty($errors)){
+        $user = getUserByEmail($data['email']);
+
+        if(empty($user) || !password_verify($data['password'], $user['password'])){
+            $errors['error_login'] = 'Email Atau Password Salah';
             $_SESSION['errors'] = $errors;
+            $_SESSION['old'] = ['email' => $data['email']];
             redirect('/login');
-            exit();    
+            exit();
         }
 
+        session_regenerate_id(true);
+        $_SESSION['user'] = $user;
 
         if($user['role'] !== 'admin'){
-            $_SESSION['user'] = $user;
             redirect('/');
             exit();
         }
-        
-        if($user['role'] === 'admin'){
-            $_SESSION['user'] = $user;
-            redirect('/dashboard');
-            exit();
-        }
 
-
+        redirect('/dashboard');
+        exit();
     }
 }
 

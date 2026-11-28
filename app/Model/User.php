@@ -58,7 +58,7 @@ function updateUser(array $data = []): void {
     mysqli_stmt_execute($stmt);
 }
 
-function getUserByEmail(string $email): array{
+function getUserByEmail(string $email): ?array{
     global $conn;
 
     $stmt = mysqli_prepare($conn, "SELECT * FROM " . USER_TABLE . " WHERE EMAIL = ?");
@@ -66,7 +66,7 @@ function getUserByEmail(string $email): array{
     mysqli_stmt_execute($stmt);
 
     $result = mysqli_stmt_get_result($stmt);
-    return mysqli_fetch_assoc($result);
+    return mysqli_fetch_assoc($result) ?: [];
 }
 
 function userAuthenticate(string $email, string $password): array|null{

@@ -135,15 +135,15 @@
                     <!-- DATA: error_message -->
                     <?php if (!empty($model['errors']['email'])): ?>
                     <div class="alert-error">
-                        <?= 'Email: ' . htmlspecialchars($model['errors']['email']) ?>
+                        <?= 'Email: ' . htmlspecialchars($model['errors']['email'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?>
                     </div>
                     <?php elseif (!empty($model['errors']['password'])): ?>
                         <div class="alert-error">
-                            <?= 'Password: ' . htmlspecialchars($model['errors']['password']) ?>
+                            <?= 'Password: ' . htmlspecialchars($model['errors']['password'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?>
                         </div>
                     <?php elseif (!empty($model['errors']['error_login'])): ?>
                         <div class="alert-error">
-                            <?= $model['errors']['error_login'] ?>
+                            <?= htmlspecialchars($model['errors']['error_login'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?>
                         </div>
                     <?php endif; ?>
 
