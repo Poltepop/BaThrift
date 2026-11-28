@@ -18,6 +18,7 @@ CREATE TABLE `stores` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `user_id` int UNIQUE NOT NULL COMMENT '1 user = maksimal 1 toko. Harus user dengan role = seller (validated in PHP)',
   `name` varchar(100) UNIQUE NOT NULL,
+  `slug` varchar(255) UNIQUE NOT NULL,
   `description` text,
   `logo` varchar(255),
   `status` ENUM ('active', 'suspended') NOT NULL DEFAULT 'active',

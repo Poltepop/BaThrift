@@ -19,6 +19,7 @@ add('GET', '/logout', 'AuthController', 'logout');
 add('GET', '/', 'KatalogController', 'index', ['auth']);
 add('GET', '/profil', 'UserController', 'index', ['auth']);
 add('POST', '/update-user', 'UserController', 'update', ['auth']);
+add('POST', '/delete-avatar', 'UserController', 'deleteAvatar', ['auth']);
 add('POST', '/update-toko', 'TokoController', 'update', ['auth']);
 add('GET', '/daftar-alamat', 'AddressController', 'index', ['auth']);
 add('POST', '/add-alamat', 'AddresController', 'addAddress', ['auth']);

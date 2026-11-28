@@ -103,3 +103,15 @@ function storeDataUser(array $data = []): void{
     mysqli_stmt_bind_param($stmt, 'ssss', $data['name'], $data['email'], $data['password'], $data['phone']);
     mysqli_stmt_execute($stmt);
 }
+
+function deleteUserPhoto(int $id): void{
+    global $conn;
+
+    $emptyPhoto = '';
+    $stmt = mysqli_prepare($conn, "UPDATE " . USER_TABLE . " SET photo = ? WHERE id = ?");
+    if ($stmt === false) {
+        return;
+    }
+    mysqli_stmt_bind_param($stmt, 'si', $emptyPhoto, $id);
+    mysqli_stmt_execute($stmt);
+}

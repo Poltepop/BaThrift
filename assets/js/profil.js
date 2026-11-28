@@ -139,26 +139,107 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // 5. Hapus Foto Profil — kembalikan ke tampilan initials
+    // 5. Hapus Foto Profil — hapus file di server & database, lalu kembalikan ke initials
+    function resetAvatarPreview() {
+        var img = document.getElementById('avatar-preview-img');
+        var initialsBox = document.getElementById('avatar-preview-initials');
+
+        if (img) {
+            img.src = '';
+            img.style.display = 'none';
+        }
+        if (initialsBox) {
+            initialsBox.style.display = '';
+        }
+        if (avatarFileInput) {
+            avatarFileInput.value = '';
+        }
+    }
+
+    var deleteAvatarOverlay = document.getElementById('delete-avatar-confirm-overlay');
+    var btnCancelDeleteAvatar = document.getElementById('btn-cancel-delete-avatar');
+    var btnConfirmDeleteAvatar = document.getElementById('btn-confirm-delete-avatar');
+
+    function closeDeleteAvatarModal() {
+        if (deleteAvatarOverlay) {
+            deleteAvatarOverlay.classList.add('is-hidden');
+        }
+    }
+
     if (btnDeleteAvatar) {
         btnDeleteAvatar.addEventListener('click', function () {
-            var confirmDelete = window.confirm('Kembalikan foto profil ke default inisial?');
-            if (confirmDelete) {
-                var img = document.getElementById('avatar-preview-img');
-                var initialsBox = document.getElementById('avatar-preview-initials');
+            var hasSavedPhoto = btnDeleteAvatar.getAttribute('data-has-photo') === '1';
+            var hasSelectedFile = avatarFileInput && avatarFileInput.files && avatarFileInput.files.length > 0;
 
-                if (img) {
-                    img.src = '';
-                    img.style.display = 'none';
-                }
-                if (initialsBox) {
-                    initialsBox.style.display = '';
-                }
-                if (avatarFileInput) {
-                    avatarFileInput.value = '';
-                }
-                showToast('Foto profil dikembalikan ke inisial.');
+            if (!hasSavedPhoto && !hasSelectedFile) {
+                showToast('Tidak ada foto profil untuk dihapus.');
+                return;
             }
+
+            if (deleteAvatarOverlay) {
+                deleteAvatarOverlay.classList.remove('is-hidden');
+            }
+        });
+    }
+
+    if (btnCancelDeleteAvatar) {
+        btnCancelDeleteAvatar.addEventListener('click', function () {
+            closeDeleteAvatarModal();
+        });
+    }
+
+    if (deleteAvatarOverlay) {
+        deleteAvatarOverlay.addEventListener('click', function (e) {
+            if (e.target === deleteAvatarOverlay) {
+                closeDeleteAvatarModal();
+            }
+        });
+    }
+
+    if (btnConfirmDeleteAvatar && btnDeleteAvatar) {
+        btnConfirmDeleteAvatar.addEventListener('click', function () {
+            var hasSavedPhoto = btnDeleteAvatar.getAttribute('data-has-photo') === '1';
+            closeDeleteAvatarModal();
+
+            if (!hasSavedPhoto) {
+                resetAvatarPreview();
+                showToast('Foto profil dikembalikan ke inisial.');
+                return;
+            }
+
+            var deleteUrl = btnDeleteAvatar.getAttribute('data-delete-url');
+            if (!deleteUrl) {
+                return;
+            }
+
+            btnDeleteAvatar.disabled = true;
+
+            fetch(deleteUrl, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(function (response) {
+                    return response.json().then(function (data) {
+                        if (!response.ok || !data.success) {
+                            throw new Error((data && data.message) || 'Gagal menghapus foto profil.');
+                        }
+                        return data;
+                    });
+                })
+                .then(function (data) {
+                    resetAvatarPreview();
+                    btnDeleteAvatar.setAttribute('data-has-photo', '0');
+                    showToast(data.message || 'Foto profil berhasil dihapus!');
+                })
+                .catch(function (err) {
+                    showToast(err.message || 'Terjadi kesalahan saat menghapus foto profil.');
+                })
+                .finally(function () {
+                    btnDeleteAvatar.disabled = false;
+                });
         });
     }
 
