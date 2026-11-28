@@ -28,5 +28,6 @@ add('POST', '/add-alamat', 'AddresController', 'addAddress', ['auth']);
 //Penjual 
 add('GET', '/buka-toko', 'TokoController', 'bukaToko', ['auth']);
 add('POST', '/buka-toko', 'TokoController', 'store', ['auth']);
+add('GET', '/toko/{slug}', 'TokoController', 'profilToko', ['auth']);
 add('GET', '/dashboard', 'dashboardController', 'index', ['auth', 'admin']);
 run();

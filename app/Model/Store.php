@@ -75,3 +75,61 @@ function createStore(array $data): int {
 
     return (int) mysqli_insert_id($conn);
 }
+
+function getStoreBySlug(string $slug): ?array {
+    global $conn;
+
+    $stmt = mysqli_prepare(
+        $conn,
+        "SELECT s.*, u.name AS owner_name, u.username AS owner_username "
+        . "FROM " . STORE_TABLE . " s "
+        . "INNER JOIN users u ON u.id = s.user_id "
+        . "WHERE s.slug = ? LIMIT 1"
+    );
+    mysqli_stmt_bind_param($stmt, 's', $slug);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    return mysqli_fetch_assoc($result) ?: null;
+}
+
+function getStoreItems(int $storeId): array {
+    global $conn;
+
+    $stmt = mysqli_prepare(
+        $conn,
+        "SELECT i.*, c.name AS category_name "
+        . "FROM items i "
+        . "LEFT JOIN categories c ON c.id = i.category_id "
+        . "WHERE i.store_id = ? AND i.status IN ('available', 'sold') "
+        . "ORDER BY i.created_at DESC"
+    );
+    mysqli_stmt_bind_param($stmt, 'i', $storeId);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    return $result ? mysqli_fetch_all($result, MYSQLI_ASSOC) : [];
+}
+
+function getStoreStats(int $storeId): array {
+    global $conn;
+
+    $stmt = mysqli_prepare(
+        $conn,
+        "SELECT "
+        . "SUM(CASE WHEN status = 'available' THEN 1 ELSE 0 END) AS ready_count, "
+        . "SUM(CASE WHEN status = 'sold' THEN 1 ELSE 0 END) AS sold_count, "
+        . "COUNT(*) AS total_count "
+        . "FROM items WHERE store_id = ? AND status IN ('available', 'sold')"
+    );
+    mysqli_stmt_bind_param($stmt, 'i', $storeId);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $row = mysqli_fetch_assoc($result) ?: [];
+
+    return [
+        'ready_count' => (int) ($row['ready_count'] ?? 0),
+        'sold_count'  => (int) ($row['sold_count'] ?? 0),
+        'total_count' => (int) ($row['total_count'] ?? 0),
+    ];
+}

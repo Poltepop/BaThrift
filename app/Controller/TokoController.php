@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../Model/Store.php";
 require_once __DIR__ . "/../Model/Address.php";
 require_once __DIR__ . "/../Model/User.php";
+require_once __DIR__ . "/../utils/getInitials.php";
 
 function buildStoreSlug(string $text): string {
     $slug = strtolower(trim($text));
@@ -142,6 +143,77 @@ function store(): void {
     $_SESSION['user'] = getUserById($userId);
     redirect('/profil');
     exit();
+}
+
+function mapItemCondition(string $condition): array {
+    return match ($condition) {
+        'like_new' => ['key' => 'mint', 'label' => 'Seperti Baru'],
+        'has_defects' => ['key' => 'minus', 'label' => 'Ada Minus'],
+        default => ['key' => 'good', 'label' => 'Baik'],
+    };
+}
+
+function profilToko(string $slug = ''): void {
+    $slug = trim($slug);
+    $store = $slug !== '' ? getStoreBySlug($slug) : null;
+
+    if ($store === null) {
+        http_response_code(404);
+        echo '404 - Toko tidak ditemukan';
+        exit();
+    }
+
+    $storeId = (int) $store['id'];
+    $addresses = getAddressUser((int) $store['user_id']);
+    $storeAddress = $addresses[0] ?? null;
+    $city = $storeAddress['city'] ?? 'Indonesia';
+    $province = $storeAddress['province'] ?? '';
+    $locationLabel = $province !== '' ? ($city . ', ' . $province) : $city;
+
+    $rawItems = getStoreItems($storeId);
+    $stats = getStoreStats($storeId);
+    $storeInitials = getInitials($store['name'] ?? 'TH');
+
+    $products = [];
+    $categories = [];
+
+    foreach ($rawItems as $item) {
+        $cond = mapItemCondition($item['item_condition'] ?? 'good');
+        $catName = $item['category_name'] ?? 'Lainnya';
+        $catSlug = strtolower(preg_replace('/[^a-z0-9]+/i', '-', $catName) ?? 'lainnya');
+        $categories[$catSlug] = $catName;
+
+        $products[] = [
+            'id'              => (int) $item['id'],
+            'title'           => $item['name'],
+            'brand'           => $catName,
+            'image'           => url('/assets/img/items/' . $item['main_photo']),
+            'alt'             => $item['name'],
+            'size'            => strtoupper((string) ($item['size'] ?? '')),
+            'condition'       => $cond['key'],
+            'condition_label' => $cond['label'],
+            'price'           => (int) $item['price'],
+            'is_sold'         => ($item['status'] ?? '') === 'sold',
+            'category_slug'   => $catSlug,
+            'seller'          => [
+                'name'     => $store['name'],
+                'initials' => $storeInitials,
+                'city'     => $city,
+                'verified' => ($store['status'] ?? '') === 'active',
+            ],
+        ];
+    }
+
+    Render('penjual/profil-toko', [
+        'title'         => ($store['name'] ?? 'Profil Toko') . ' - BaThrift',
+        'store'         => $store,
+        'storeInitials' => $storeInitials,
+        'locationLabel' => $locationLabel,
+        'city'          => $city,
+        'stats'         => $stats,
+        'products'      => $products,
+        'categories'    => $categories,
+    ]);
 }
 
 function update(): void{
