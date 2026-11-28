@@ -44,14 +44,29 @@ function run(): void{
     $method = $_SERVER['REQUEST_METHOD'];
 
     foreach($routes as $route){
-        if($path == $route['path'] && $method == $route['method']){
+        if($method !== $route['method']){
+            continue;
+        }
 
+        $params = [];
+        $matched = ($path == $route['path']);
+
+        if(!$matched && strpos($route['path'], '{') !== false){
+            $pattern = '#^' . preg_replace('/\{[a-zA-Z_][a-zA-Z0-9_]*\}/', '([^/]+)', $route['path']) . '$#';
+            if(preg_match($pattern, $path, $matches)){
+                array_shift($matches);
+                $params = array_map('urldecode', $matches);
+                $matched = true;
+            }
+        }
+
+        if($matched){
             foreach($route['middlewares'] as $middleware){
                 call_user_func("middleware$middleware");
             }
 
             require_once __DIR__ . "/../Controller/" . $route['controller'] . ".php";
-            call_user_func($route['function']);
+            call_user_func_array($route['function'], $params);
             return;
         }
     }

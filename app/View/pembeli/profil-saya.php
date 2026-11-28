@@ -390,7 +390,7 @@ $toko = [
                                         <span class="material-symbols-outlined">storefront</span>
                                         <span>KELOLA TOKO SAYA (DASHBOARD)</span>
                                     </a>
-                                    <a class="btn-view-public-shop" id="btn-view-public-shop" href="<?= ' ' ?>">
+                                    <a class="btn-view-public-shop" id="btn-view-public-shop" href="<?= htmlspecialchars(url('/toko/' . ($model['store']['slug'] ?? '')), ENT_QUOTES | ENT_XML1, 'UTF-8') ?>">
                                         <span class="material-symbols-outlined">visibility</span>
                                         <span>LIHAT PROFIL TOKO PUBLIK</span>
                                         <span class="material-symbols-outlined" style="font-size: 16px;">open_in_new</span>

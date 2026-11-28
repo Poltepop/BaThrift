@@ -15,54 +15,27 @@ $active_nav = 'jual';
 $cart_count = 3;
 
 // DATA: Informasi pengguna aktif (untuk catatan satu akun)
-$user = [
-    'nama_tampilan' => 'Dimas T.',
-    'username' => 'dimas_vintage'
-];
+$user = $model['user'] ?? ($_SESSION['user'] ?? []);
 
 // DATA: Nilai lama input form (jika ada validasi server / reload)
-$old_nama_toko = $old_nama_toko ?? '';
-$old_slug_toko = $old_slug_toko ?? 'nama-toko-kamu';
-$old_kategori = $old_kategori ?? 'streetwear';
-$old_deskripsi = $old_deskripsi ?? '';
-$old_kota_asal = $old_kota_asal ?? '';
-$errors = $errors ?? [];
+$old_nama_toko = $model['old']['nama_toko'] ?? '';
+$old_slug_toko = $model['old']['slug_toko'] ?? 'nama-toko-kamu';
+$old_deskripsi = $model['old']['deskripsi_toko'] ?? '';
+$old_kota_asal = $model['old']['kota_asal'] ?? '';
+$errors = $model['errors'] ?? [];
 
-// DATA: Daftar kategori utama lapak
-$kategori_list = [
-    [
-        'value' => 'streetwear',
-        'label' => 'Streetwear',
-        'icon' => 'styler'
-    ],
-    [
-        'value' => 'vintage',
-        'label' => 'Vintage 90s',
-        'icon' => 'history'
-    ],
-    [
-        'value' => 'denim',
-        'label' => 'Denim & Work',
-        'icon' => 'dry_cleaning'
-    ],
-    [
-        'value' => 'y2k',
-        'label' => 'Y2K & Casual',
-        'icon' => 'checkroom'
-    ]
-];
 
 // DATA: Daftar kota asal pengiriman
 $kota_list = [
-    ['value' => 'jkt-selatan', 'label' => 'Jakarta Selatan, DKI Jakarta'],
-    ['value' => 'jkt-barat', 'label' => 'Jakarta Barat, DKI Jakarta'],
-    ['value' => 'jkt-pusat', 'label' => 'Jakarta Pusat, DKI Jakarta'],
-    ['value' => 'bdg-kota', 'label' => 'Bandung, Jawa Barat'],
-    ['value' => 'sby-kota', 'label' => 'Surabaya, Jawa Timur'],
-    ['value' => 'yk-kota', 'label' => 'Yogyakarta, DI Yogyakarta'],
-    ['value' => 'smg-kota', 'label' => 'Semarang, Jawa Tengah'],
-    ['value' => 'dps-kota', 'label' => 'Denpasar, Bali'],
-    ['value' => 'mdn-kota', 'label' => 'Medan, Sumatera Utara']
+    ['value' => 'Jakarta Selatan, DKI Jakarta', 'label' => 'Jakarta Selatan, DKI Jakarta'],
+    ['value' => 'Jakarta Barat, DKI Jakarta', 'label' => 'Jakarta Barat, DKI Jakarta'],
+    ['value' => 'Jakarta Pusat, DKI Jakarta', 'label' => 'Jakarta Pusat, DKI Jakarta'],
+    ['value' => 'Bandung, Jawa Barat', 'label' => 'Bandung, Jawa Barat'],
+    ['value' => 'Surabaya, Jawa Timur', 'label' => 'Surabaya, Jawa Timur'],
+    ['value' => 'Yogyakarta, DI Yogyakarta', 'label' => 'Yogyakarta, DI Yogyakarta'],
+    ['value' => 'Semarang, Jawa Tengah', 'label' => 'Semarang, Jawa Tengah'],
+    ['value' => 'Denpasar, Bali', 'label' => 'Denpasar, Bali'],
+    ['value' => 'Medan, Sumatera Utara', 'label' => 'Medan, Sumatera Utara']
 ];
 ?>
 <!DOCTYPE html>
@@ -230,7 +203,7 @@ $kota_list = [
                             </div>
 
                             <!-- Form Pendaftaran Toko -->
-                            <form class="store-form" id="store-form" action="" method="post">
+                            <form class="store-form" id="store-form" action="<?= htmlspecialchars(url('/buka-toko'), ENT_QUOTES | ENT_XML1, 'UTF-8') ?>" method="post">
                                 <!-- Field 1: Nama Toko (Reusable Input Component) -->
                                 <!-- DATA: old_nama_toko -->
                                 <div class="field-block">
@@ -289,6 +262,12 @@ $kota_list = [
                                               rows="3"
                                               placeholder="Ceritakan kurasi thrift yang kamu jual, standar kondisi barang, jadwal packing harian, dan kebijakan respon chat..."
                                               required="required"><?= htmlspecialchars($old_deskripsi, ENT_QUOTES | ENT_XML1, 'UTF-8') ?></textarea>
+                                    <?php if (!empty($errors['deskripsi_toko'])): ?>
+                                        <div class="input-error-box">
+                                            <span class="material-symbols-outlined icon-fill">error</span>
+                                            <span class="error-text"><?= htmlspecialchars($errors['deskripsi_toko'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></span>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
 
                                 <!-- Field 5: Kota Asal Pengiriman -->
@@ -319,6 +298,12 @@ $kota_list = [
                                     <p class="field-helper-plain">
                                         Digunakan mesin kalkulator ongkos kirim otomatis untuk pembeli dari seluruh Indonesia.
                                     </p>
+                                    <?php if (!empty($errors['kota_asal'])): ?>
+                                        <div class="input-error-box">
+                                            <span class="material-symbols-outlined icon-fill">error</span>
+                                            <span class="error-text"><?= htmlspecialchars($errors['kota_asal'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></span>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
 
                                 <!-- Checkbox Kode Etik -->
@@ -360,7 +345,7 @@ $kota_list = [
                                     <h3 class="note-title">SATU AKUN UNTUK SEMUA KEPERLUAN</h3>
                                     <p class="note-desc">
                                         Tanpa daftar ulang! Akun
-                                        <strong class="note-user-name"><?= htmlspecialchars($user['nama_tampilan'], ENT_QUOTES | ENT_XML1, 'UTF-8') ?></strong>
+                                        <strong class="note-user-name"><?= htmlspecialchars($user['name'] ?? 'Pengguna', ENT_QUOTES | ENT_XML1, 'UTF-8') ?></strong>
                                         langsung aktif berjualan dan tetap bebas dipakai checkout belanja seperti biasa. Tidak perlu login-logout akun terpisah.
                                     </p>
                                 </div>
