@@ -35,7 +35,7 @@ $toko = [
 
     <!-- Pure Native Stylesheets (Neo-Brutalisme BaThrift) -->
     <link rel="stylesheet" href="<?= url('/assets/css/katalog.css') ?>" />
-    <link rel="stylesheet" href="<?= url('/assets/css/profil.css') ?>" />
+    <link rel="stylesheet" href="<?= url('/assets/css/profil.css') ?>?v=<?= filemtime(__DIR__ . '/../../../assets/css/profil.css') ?>" />
 </head>
 
 <body>
@@ -228,7 +228,11 @@ $toko = [
                                             <span>GANTI FOTO</span>
                                             <input id="avatar-file-input" class="hidden-file-input" style="display:none;" type="file" accept="image/png, image/jpeg" name="profile"/>
                                         </label>
-                                        <button type="button" class="btn-avatar-delete" id="btn-delete-avatar">
+                                        <button type="button"
+                                                class="btn-avatar-delete"
+                                                id="btn-delete-avatar"
+                                                data-has-photo="<?= !empty($model['user']['photo']) ? '1' : '0' ?>"
+                                                data-delete-url="<?= htmlspecialchars(url('/delete-avatar'), ENT_QUOTES | ENT_XML1, 'UTF-8') ?>">
                                             <span class="material-symbols-outlined">delete</span>
                                             <span>Hapus</span>
                                         </button>
@@ -484,6 +488,28 @@ $toko = [
             </div>
         </div>
 
+        <!-- Modal Dialog Konfirmasi Hapus Foto Profil Neo-Brutalist -->
+        <div class="logout-confirm-overlay is-hidden" id="delete-avatar-confirm-overlay">
+            <div class="logout-confirm-card">
+                <div class="logout-confirm-header">
+                    <span class="material-symbols-outlined icon-logout-warning">delete</span>
+                    <span class="logout-confirm-title">HAPUS FOTO PROFIL</span>
+                </div>
+                <p class="logout-confirm-message">
+                    Apakah Anda yakin ingin menghapus foto profil dan mengembalikannya ke tampilan inisial?
+                </p>
+                <div class="logout-confirm-actions">
+                    <button type="button" class="btn-logout-cancel" id="btn-cancel-delete-avatar">
+                        BATAL
+                    </button>
+                    <button type="button" class="btn-logout-confirm" id="btn-confirm-delete-avatar">
+                        <span class="material-symbols-outlined">delete</span>
+                        <span>YA, HAPUS</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- Modal Dialog Konfirmasi Logout Neo-Brutalist -->
         <div class="logout-confirm-overlay is-hidden" id="logout-confirm-overlay">
             <div class="logout-confirm-card">
@@ -511,7 +537,7 @@ $toko = [
     <?php require __DIR__ . '/../components/footer.php'; ?>
 
     <!-- JavaScript Interaktif DOM -->
-    <script src="<?= url('/assets/js/profil.js') ?>"></script>
+    <script src="<?= url('/assets/js/profil.js') ?>?v=<?= filemtime(__DIR__ . '/../../../assets/js/profil.js') ?>"></script>
 </body>
 
 </html>

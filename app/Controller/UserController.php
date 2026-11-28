@@ -83,3 +83,43 @@ function update():void {
         exit();
     }
 }
+
+function deleteAvatar(): void {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        redirect('/profil');
+        exit();
+    }
+
+    $userId = (int) ($_SESSION['user']['id'] ?? 0);
+    $user = getUserById($userId);
+    $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH'])
+        && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
+    if (!empty($user['photo'])) {
+        try {
+            deleteImage($user['photo']);
+        } catch (RuntimeException $e) {
+            if ($isAjax) {
+                header('Content-Type: application/json; charset=UTF-8');
+                http_response_code(500);
+                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+                exit();
+            }
+            $_SESSION['errors'] = ['file_upload' => $e->getMessage()];
+            redirect('/profil');
+            exit();
+        }
+
+        deleteUserPhoto($userId);
+        $_SESSION['user'] = getUserById($userId);
+    }
+
+    if ($isAjax) {
+        header('Content-Type: application/json; charset=UTF-8');
+        echo json_encode(['success' => true, 'message' => 'Foto profil berhasil dihapus!']);
+        exit();
+    }
+
+    redirect('/profil');
+    exit();
+}
