@@ -115,3 +115,14 @@ function deleteUserPhoto(int $id): void{
     mysqli_stmt_bind_param($stmt, 'si', $emptyPhoto, $id);
     mysqli_stmt_execute($stmt);
 }
+
+function updateUserRole(int $id, string $role): void {
+    global $conn;
+
+    $stmt = mysqli_prepare($conn, "UPDATE " . USER_TABLE . " SET role = ? WHERE id = ?");
+    if ($stmt === false) {
+        return;
+    }
+    mysqli_stmt_bind_param($stmt, 'si', $role, $id);
+    mysqli_stmt_execute($stmt);
+}
